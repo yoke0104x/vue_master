@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "PingFang-SC", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
+        sans-serif !important;
+}
+
+@font-face {
+    font-family: "led";
+    src: url("../fonts/led.ttf");
+}
+
+@font-face {
+    font-family: "PingFang-SC-Semibold";
+}
+
+@font-face {
+    font-family: "PingFang-Light";
+}
+
+@font-face {
+    font-family: "PingFang-Bold";
+}
+
+@font-face {
+    font-family: "PingFang-SC";
+}
+
+@font-face {
+    font-family: "PingFang-JT";
+}
+
+@font-face {
+    font-family: "PingFang-JC";
+}
