@@ -1,0 +1,86 @@
+/*
+ *@description:
+ * @author wayne
+ * @date 2022-06-14 13:11
+*/
+@measureSize: 3
+
+.container {
+    position: absolute;
+    width:  calc(5120px * @measureSize);
+    height: 1440px;
+    background: rgba(5, 11, 22, 1) url(../../assets/images/container-bg.png) no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    transform-origin: 0px 0px;
+    filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%)
+    opacity(100%) grayscale(0%);
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.title-wrap {
+    overflow: hidden;
+    position: absolute;
+    left: calc(790px * @measureSize);
+    top: 15px;
+    width: calc(3626px * @measureSize);
+    height: 180px;
+    z-index: 2;
+    transform: rotate(0deg);
+    background: url(../../assets/images/top-title.png) no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+.title{
+    overflow: hidden;
+    position: absolute;
+    left: 1839.5px;
+    top: 24px;
+    width: 1441px;
+    height: 81px;
+    z-index: 6;
+    transform: rotate(0deg);
+}
+
+.title-name{
+    overflow: hidden;
+    position: absolute;
+    left: 2369px;
+    top: 102px;
+    width: 382px;
+    height: 78px;
+    z-index: 7;
+    transform: rotate(0deg);
+    display: flex;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 45px;
+    justify-content: center;
+    align-items: center;
+    text-shadow: rgb(15 146 255) 0px 0px 14px;
+    p{
+        background-image: -webkit-linear-gradient(left, rgb(61, 213, 255), rgb(67, 232, 243));
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.title-date{
+    overflow: hidden;
+    position: absolute;
+    left: 2290px;
+    top: 176px;
+    width: 520px;
+    height: 60px;
+    z-index: 38;
+    transform: rotate(0deg);
+    font-size: 20px;
+    color: rgb(96, 186, 251);
+    line-height: 60px;
+    text-align: center;
+    font-weight: normal;
+    /*letter-spacing: 2px;*/
+}

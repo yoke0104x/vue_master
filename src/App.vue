@@ -1,19 +1,20 @@
 <template>
-  <div id="app">
-    <HelloWorld/>
-  </div>
+  <FirstScreenPage/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import "@/assets/css/reset.css";
+import "@/assets/css/custom-animation.css";
+import FirstScreenPage from "@/pages/FirstScreenPage";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FirstScreenPage
   }
 }
 </script>
 
 <style>
+
 </style>

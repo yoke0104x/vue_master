@@ -12,26 +12,12 @@ body {
     src: url("../fonts/led.ttf");
 }
 
-@font-face {
-    font-family: "PingFang-SC-Semibold";
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
 }
-
-@font-face {
-    font-family: "PingFang-Light";
-}
-
-@font-face {
-    font-family: "PingFang-Bold";
-}
-
-@font-face {
-    font-family: "PingFang-SC";
-}
-
-@font-face {
-    font-family: "PingFang-JT";
-}
-
-@font-face {
-    font-family: "PingFang-JC";
+html,
+body {
+    height: 100%;
 }
