@@ -8,14 +8,13 @@
 .container {
     position: absolute;
     width:  calc(5120px * @measureSize);
-    height: 1440px;
+    height: calc(1440px * @measureSize);
     background: rgba(5, 11, 22, 1) url(../../assets/images/container-bg.png) no-repeat;
     background-size: cover;
     overflow-x: hidden;
     transform-origin: 0px 0px;
-    filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%)
-    opacity(100%) grayscale(0%);
-    //background: @primary; // 全局变量
+    filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%) opacity(100%) grayscale(0%);
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -25,9 +24,9 @@
     overflow: hidden;
     position: absolute;
     left: calc(790px * @measureSize);
-    top: 15px;
+    top: calc(15px * @measureSize);
     width: calc(3626px * @measureSize);
-    height: 180px;
+    height: calc(180px * @measureSize);
     z-index: 2;
     transform: rotate(0deg);
     background: url(../../assets/images/top-title.png) no-repeat;
@@ -35,13 +34,14 @@
     display: flex;
     justify-content: center;
 }
+
 .title{
     overflow: hidden;
     position: absolute;
-    left: 1839.5px;
-    top: 24px;
-    width: 1441px;
-    height: 81px;
+    left: calc(1839.5px * @measureSize);
+    top: calc(24px * @measureSize);
+    width: calc(1441px * @measureSize);
+    height: calc(81px * @measureSize);
     z-index: 6;
     transform: rotate(0deg);
 }
@@ -49,19 +49,20 @@
 .title-name{
     overflow: hidden;
     position: absolute;
-    left: 2369px;
-    top: 102px;
-    width: 382px;
-    height: 78px;
+    left: calc(2369px * @measureSize);
+    top: calc(102px * @measureSize);
+    width: calc(382px * @measureSize);
+    height: calc(78px * @measureSize);
     z-index: 7;
     transform: rotate(0deg);
     display: flex;
     text-align: center;
     line-height: 1.2;
-    font-size: 45px;
+    font-size: calc(45px * @measureSize);
     justify-content: center;
     align-items: center;
-    text-shadow: rgb(15 146 255) 0px 0px 14px;
+    text-shadow: rgb(15 146 255) 0px 0px calc(14px * @measureSize);
+
     p{
         background-image: -webkit-linear-gradient(left, rgb(61, 213, 255), rgb(67, 232, 243));
         background-clip: text;
@@ -72,16 +73,29 @@
 .title-date{
     overflow: hidden;
     position: absolute;
-    left: 2290px;
-    top: 176px;
-    width: 520px;
-    height: 60px;
+    left: calc(2290px * @measureSize);
+    top: calc( 176px * @measureSize);
+    width: calc(520px * @measureSize);
+    height: calc(60px * @measureSize);
     z-index: 38;
     transform: rotate(0deg);
-    font-size: 20px;
+    font-size: calc(20px * @measureSize);
     color: rgb(96, 186, 251);
-    line-height: 60px;
+    line-height: calc(60px * @measureSize);
     text-align: center;
     font-weight: normal;
     /*letter-spacing: 2px;*/
+}
+
+.content-bg{
+    overflow: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: calc(5120px * @measureSize);
+    height: calc(1440px * @measureSize);
+    z-index: 1;
+    transform: rotate(0deg);
+    background: url(../../assets/images/content-bg.png) no-repeat;
+    background-size: cover;
 }
