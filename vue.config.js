@@ -8,8 +8,19 @@ module.exports = {
     pluginOptions: {
         'style-resources-loader': {
             preProcessor: 'less',
+            injector: 'append',
             patterns: [path.resolve(__dirname, './src/global.less')]
         }
     },
+    css: {
+        loaderOptions: {
+            less: {
+                javascriptEnabled: true,
+                globalVars: {
+                    primary: '#fff'
+                }
+            }
+        }
+    }
 };
 

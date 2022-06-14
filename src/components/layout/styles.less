@@ -3,7 +3,7 @@
  * @author wayne
  * @date 2022-06-14 13:11
 */
-@measureSize: 3
+@import "/src/global.less";
 
 .container {
     position: absolute;
@@ -15,6 +15,7 @@
     transform-origin: 0px 0px;
     filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%)
     opacity(100%) grayscale(0%);
+    //background: @primary; // 全局变量
     &::-webkit-scrollbar {
         display: none;
     }
