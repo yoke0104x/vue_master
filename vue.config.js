@@ -21,6 +21,16 @@ module.exports = {
                 }
             }
         }
+    },
+    devServer: {
+        proxy: {
+            '/dybigs': {
+                target: 'http://121.36.46.110:16993',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/dybigs/, '/dybigs')
+            },
+        }
     }
+
 };
 

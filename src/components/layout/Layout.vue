@@ -9,11 +9,13 @@
     </div>
     <div class="title-date">{{titleDate}}</div>
     <div class="content-bg"/>
-<!--    中间部分-->
-    <ContentCenter/>
 
 <!--    轮播页码-->
     <PageNation/>
+
+<!--    content-->
+    <slot/>
+
   </div>
 </template>
 
@@ -21,7 +23,6 @@
 import { playAnimation } from '@/utils';
 import moment from 'moment';
 import PageNation from "@/components/pageNation";
-import ContentCenter from "@/components/contentCenter";
 export default {
   name: "Layout",
   data(){
@@ -59,7 +60,6 @@ export default {
   },
   components: {
     PageNation,
-    ContentCenter
   }
 }
 </script>

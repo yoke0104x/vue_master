@@ -11,7 +11,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       playAnimation(".pageNation-circle", [
-        { type: "fadeInUp", name: "向上移入", delayed: 3, loop: false, frequency: 1, duration: 1, isPlayer: false, isDisabled: false },
+        { type: "fadeInUp", name: "向上移入", delayed: 1, loop: false, frequency: 1, duration: 1, isPlayer: false, isDisabled: false },
       ]);
 
       playAnimation(".pageNation-container", [
