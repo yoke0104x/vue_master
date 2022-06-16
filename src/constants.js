@@ -6,6 +6,7 @@
 
 export const SUCCESENUM = 'SUCCESS';
 
-export const BAR = 'bar';
-
-export const LINE = 'line';
+export const CHARTS_TYPE = {
+    BAR: 'bar',
+    LINE: 'line'
+}

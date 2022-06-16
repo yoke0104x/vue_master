@@ -8,10 +8,13 @@
 .right-box-container{
   overflow: hidden;
   position: absolute;
-  left: calc(4148.5px * @measureSize);
+  left: calc(4115.5px * @measureSize);
   top: calc(307.84px * @measureSize);
-  width: calc(810px * @measureSize);
-  height: calc(970px * @measureSize);
+  width: calc(835px * @measureSize);
+  height: calc(980px * @measureSize);
   z-index: 26;
-  transform: rotate(0deg);
+  transform-style: preserve-3d;
+  /* perspective-origin: 10% 10%; */
+  transform-origin: left;
+  transform: perspective(596px) rotateY(-3.6deg) scale(0.85);
 }

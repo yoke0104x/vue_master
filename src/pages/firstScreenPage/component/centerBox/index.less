@@ -4,3 +4,18 @@
  * @date 2022-06-15 09:13
 */
 @import "../../../../global.less";
+
+.center-box{
+  height: 100%;
+  width: 100%;
+  padding: 0 calc(234px * @measureSize);
+  display: flex;
+  flex-direction: column;
+
+  .center-box-content{
+    flex: 1;
+    height: calc(100% - calc(148px * @measureSize));
+    display: flex;
+    justify-content: space-between;
+  }
+}
