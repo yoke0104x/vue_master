@@ -3,7 +3,7 @@
  * @author wayne
  * @date 2022-06-17 10:06
 */
-
+import polyline from "@/utils/polyline";
 /**
  * 获取地图上显示的markers
  *  * @param AMap
@@ -48,4 +48,23 @@ export const getMarkerList = (AMap, list = []) => {
                 direction: 'top'
             }
         }))
+}
+
+export const setPolyLine=()=>{
+    return new AMap.Polyline({
+        path: polyline,
+        isOutline: true,
+        outlineColor: '#ffeeff',
+        borderWeight: 3,
+        strokeColor: "#3366FF",
+        strokeOpacity: 1,
+        strokeWeight: 6,
+        // 折线样式还支持 'dashed'
+        strokeStyle: "solid",
+        // strokeStyle是dashed时有效
+        strokeDasharray: [10, 5],
+        lineJoin: 'round',
+        lineCap: 'round',
+        zIndex: 50,
+    })
 }
