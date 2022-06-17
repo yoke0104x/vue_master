@@ -127,7 +127,7 @@ export default {
       margin: 0 auto;
       background: url("../../../../assets/images/p1-center-pie-bg.png") no-repeat;
       background-size: cover;
-      animation: 1000ms ease 9000ms 1 normal both running fadeInUp;
+      animation: 1000ms ease 6000ms 1 normal both running fadeInUp;
     }
   }
 

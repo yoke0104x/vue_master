@@ -4,10 +4,14 @@
       <TitleCard :title="name"/>
     </div>
     <div class="main-eco-list">
-      <div class="main-eco-list-item" v-for="(item, index) in mainEcoIndicatorsData.list" :key="index">
-        <div class="main-eco-item-target">{{item.target}}</div>
+      <div
+          class="main-eco-list-item"
+          v-for="(item, index) in mapTaskData.list"
+          :key="index"
+      >
+        <div class="main-eco-item-target">{{item.indicatorsValue}}</div>
         <div class="main-eco-item-desc">
-          {{item.desc}}
+          {{`${item.customer}${item.target}`}}
         </div>
       </div>
     </div>
@@ -28,7 +32,7 @@ export default {
     })
   },
   computed: {
-    ...mapState(useFirstPageStore, ['mainEcoIndicatorsData'])
+    ...mapState(useFirstPageStore, ['mapTaskData'])
   }
 }
 </script>
@@ -44,6 +48,7 @@ export default {
 
     .title-wrap{
       padding-left: calc(10px * @measureSize);
+      margin-bottom: calc(28px * @measureSize);
     }
 
     .main-eco-list{
@@ -56,11 +61,14 @@ export default {
         height: calc(113px * @measureSize);
         background: url("../../../../assets/images/main-eco-item.png") no-repeat;
         background-size: contain;
-        padding-left: calc(126px * @measureSize);
+        padding-left: calc(116px * @measureSize);
+        padding-right: calc(126px * @measureSize);
         padding-bottom: calc(11px * @measureSize);
         margin-bottom: calc(26px * @measureSize);
         display: flex;
         align-items: center;
+        animation: 1000ms ease 3900ms 1 normal both running fadeInDown;
+
 
         .main-eco-item-target{
           color: #44F3FE;
@@ -68,6 +76,9 @@ export default {
           line-height: normal;
           text-align: left;
           margin-right: calc(17px * @measureSize);
+          min-width: calc(102px * @measureSize);
+          white-space: nowrap;
+          animation: 1000ms ease 5600ms 1 normal both running bounceInLeft;
         }
 
         .main-eco-item-desc{
@@ -78,7 +89,9 @@ export default {
           width: calc(220px * @measureSize);
           padding: calc(18px * @measureSize) 0;
           height: 100%;
-
+          display: flex;
+          align-items: center;
+          animation: 1000ms ease 4400ms 1 normal both running bounceInRight;
         }
       }
     }

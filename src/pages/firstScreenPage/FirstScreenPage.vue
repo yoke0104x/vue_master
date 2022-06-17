@@ -17,7 +17,7 @@
 import ChartBox from "@/pages/firstScreenPage/component/chartBox/ChartBox";
 import CenterBox from "@/pages/firstScreenPage/component/centerBox/CenterBox";
 import {useFirstPageStore} from "@/store";
-import {getEconomic2, getTargetData} from "@/api";
+import {getEconomic1, getEconomic2, getTargetData} from "@/api";
 import {CHARTS_TYPE, SUCCESENUM} from "@/constants";
 import {mapActions} from "pinia";
 
@@ -40,18 +40,30 @@ export default {
     })
   },
   methods: {
-    ...mapActions(useFirstPageStore, ['insetBarAndLinesDataAction', 'insetTopIndicatorsTaskAction'])
+    ...mapActions(useFirstPageStore,
+        ['insetBarAndLinesDataAction', 'insetTopIndicatorsTaskAction', 'insetMapTaskAction']
+    )
   },
   mounted() {
+
+    //左右两边echarts图表数据
     getEconomic2().then(res => {
       if(res?.msg === SUCCESENUM){
         this.insetBarAndLinesDataAction(res)
       }
     })
 
+    //地图上方统计数据list
     getTargetData().then(res => {
       if(res?.msg === SUCCESENUM){
           this.insetTopIndicatorsTaskAction(res)
+      }
+    })
+
+    //地图数据
+    getEconomic1().then(res => {
+      if(res?.msg === SUCCESENUM){
+        this.insetMapTaskAction(res)
       }
     })
   }
