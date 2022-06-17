@@ -1,13 +1,18 @@
 <template>
   <div class="map-wrap">
     <div class="map-title">{{title}}</div>
-    <div id="p1-map-container"></div>
+    <div id="p1-map-container">
+      <img class="map-bg" src="../../../../assets/images/p1-map-bg.png" alt=""/>
+    </div>
   </div>
 </template>
 
 <script>
 import { shallowRef } from '@vue/reactivity'
 import AMapLoader from '@amap/amap-jsapi-loader';
+import {mapState} from "pinia";
+import {useFirstPageStore} from "@/store";
+import {getMarkerList} from "@/pages/firstScreenPage/component/centerBox/utils";
 
 
 export default {
@@ -31,29 +36,7 @@ export default {
         plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       }).then((AMap)=>{
 
-        // 创建 AMap.Icon 实例：
-        const icon = new AMap.Icon({
-          size: new AMap.Size(206, 254),    // 图标尺寸
-          image: require('@/assets/images/p1-map-marker-icon.png'),  // Icon的图像
-          imageOffset: new AMap.Pixel(0, -60),  // 图像相对展示区域的偏移量，适于雪碧图等
-          imageSize: new AMap.Size(206, 254)   // 根据所设置的大小拉伸或压缩图片
-        });
-
-        // 将 Icon 实例添加到 marker 上:
-        const marker = new AMap.Marker({
-          position: new AMap.LngLat(116.405467, 39.907761),
-          // offset: new AMap.Pixel(-10, -10),
-          icon: icon, // 添加 Icon 实例
-          title: '北京',
-          zoom: 13,
-          // content: 'tttttttttttttttt'
-          label: {
-            content: `<div class="marker-tooltip">tttttttttttt</div>`,
-            direction: 'top'
-          }
-        });
-
-
+        const markers = getMarkerList(AMap, this.mapTaskData?.list);
 
         this.map = new AMap.Map("p1-map-container",{  //设置地图容器id
           viewMode:"3D",    //是否为3D地图模式
@@ -61,14 +44,15 @@ export default {
           center:[105.602725,37.076636], //初始化地图中心点位置
           dragEnable: false, //地图是否可以平移
           zoomEnable: false, //地图是否可以缩放
-        }).add(marker);
-
-        console.log('===============:', new AMap.icon)
+        }).add(markers)
 
       }).catch(e=>{
         console.log(e);
       })
     },
+  },
+  computed: {
+    ...mapState(useFirstPageStore, ['mapTaskData'])
   },
   mounted(){
     //DOM初始化完成进行地图初始化
@@ -84,6 +68,7 @@ export default {
     height: 100%;
     width: 100%;
     padding: calc(38px * @measureSize) calc(56px * @measureSize) calc(108px * @measureSize);
+    animation: 1000ms ease 3000ms 1 normal both running fadeIn;
 
     .map-title{
       width: calc(675px * @measureSize);
@@ -98,25 +83,80 @@ export default {
       background: url("../../../../assets/images/p1-map-title-bg.png") no-repeat;
       background-size: contain;
       margin: 0 auto calc(10px * @measureSize);
+      animation: 1000ms ease 4000ms 1 normal both running fadeInDown;
     }
 
     #p1-map-container{
       width: 100%;
       height: calc(100% - calc(86px * @measureSize));
+      position: relative;
 
-      ///deep/ .amap-icon{
-      //  width: calc(157px * @measureSize)!important;
-      //  height: calc(155px * @measureSize)!important;
-      //
-      //  img{
-      //    width: 100%!important;
-      //    height: auto !important;
-      //  }
-      //}
+      .map-bg{
+        //pointer-events: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        //display: none;
+      }
 
-      /deep/ .marker-tooltip{
-        font-size: 100px;
-        color: red;
+      /deep/ .amap-marker-label{
+        border: none;
+
+        .tips-container{
+          width: calc(229px * @measureSize);
+          height: calc(108px * @measureSize);
+          background: url("../../../../assets/images/p1-map-tips-bg.png") no-repeat;
+          background-size: cover;
+          padding: calc( 15px * @measureSize) calc(17px * @measureSize) calc( 5px * @measureSize);
+          display: flex;
+          align-items: flex-start;
+
+          .left-icon{
+            width: calc(19px * @measureSize);
+            height: calc(18px * @measureSize);
+            margin-right: calc(18px * @measureSize);
+            flex-shrink: 0;
+
+            >img{
+              width: 100%;
+            }
+          }
+
+          .tips-content{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .tips-name{
+              color: #4BDFFF;
+              font-size: calc(16px * @measureSize);
+              height: calc(18px * @measureSize);
+              line-height: calc(18px * @measureSize);
+              text-align: left;
+            }
+
+            .tips-target{
+              font-weight: bold;
+              font-size: calc(50px * @measureSize);
+              line-height: normal;
+              text-align: left;
+              color: rgb(67, 224, 134);
+              //animation: 1000ms ease 2000ms 1 normal both running fadeInDown;
+
+              .tips-unit{
+                color: #1AC9FF;
+                font-weight: bold;
+                font-size: calc(20px * @measureSize);
+                line-height: normal;
+                text-align: left;
+                margin-left: calc(10px * @measureSize);
+              }
+            }
+          }
+        }
       }
     }
   }

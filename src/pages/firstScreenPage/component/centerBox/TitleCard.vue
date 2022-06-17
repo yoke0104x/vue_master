@@ -17,7 +17,6 @@ export default {
     line-height: normal;
     display: flex;
     align-items: center;
-    margin-bottom: calc(28px * @measureSize);
     animation: 1000ms ease 4500ms 1 normal both running fadeIn;
 
     .triangle {
