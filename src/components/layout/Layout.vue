@@ -7,7 +7,6 @@
     <div class="title-name">
       <p>经济运行概览</p>
     </div>
-    <div class="title-date">{{titleDate}}</div>
     <div class="content-bg"/>
 
 <!--    轮播页码-->
@@ -15,7 +14,7 @@
 
 <!--    content-->
     <slot/>
-
+    <div class="title-date">{{titleDate}}</div>
   </div>
 </template>
 
@@ -27,7 +26,8 @@ export default {
   name: "Layout",
   data(){
     return({
-      titleDate: moment().format('YYYY年MM月DD日 HH:mm:ss')
+      titleDate: moment().format('YYYY年MM月DD日 HH:mm:ss'),
+      time:null
     })
   },
   mounted(){
@@ -49,17 +49,25 @@ export default {
 
       //日期
       playAnimation(".title-date", [
-        { type: "fadeIn", name: "淡入", delayed: 0, loop: false, frequency: 1, duration: 1, isPlayer: false, isDisabled: false },
+        { type: "fadeIn", name: "淡入", delayed: 0, loop: false, frequency: 1, duration: 10, isPlayer: false, isDisabled: false },
       ]);
 
       //主背景（切斜部分）
       playAnimation(".content-bg", [
         { type: "bounceInRight", name: "向左弹入", delayed: 0, loop: false, frequency: 1, duration: 1, isPlayer: false, isDisabled: false },
       ]);
+
+      // 时间更新
+      this.time = setInterval(()=>{
+        this.titleDate = moment().format('YYYY年MM月DD日 HH:mm:ss');
+      },1000)
     })
   },
   components: {
     PageNation,
+  },
+  unmounted() {
+    clearInterval(this.time);
   }
 }
 </script>
