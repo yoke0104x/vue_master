@@ -1,40 +1,46 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper class="swiper-container-main" @slideChange="onSlideChange">
+            <swiper initial-slide="3" class="swiper-container-main" @slideChange="onSlideChange">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
                 <swiper-slide>Slide 2</swiper-slide>
                 <swiper-slide>Slide 3</swiper-slide>
+                <swiper-slide>
+                    <EnergyManagement />
+                </swiper-slide>
             </swiper>
         </div>
     </Layout>
-  <div ref="swiper">111</div>
 </template>
 
 <script>
 import "@/assets/css/reset.css";
 import "@/assets/css/custom-animation.css";
 import FirstScreenPage from "@/pages/firstScreenPage";
+import EnergyManagement from "@/pages/energyManagement";
 import Layout from "@/components/layout";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
+import { useMainStore } from "@/store";
+
 export default {
     name: "App",
     components: {
         FirstScreenPage,
+        EnergyManagement,
         Layout,
         Swiper,
         SwiperSlide,
     },
     setup() {
         const activeIndex = ref(0);
-
+        const useStore = useMainStore();
         const onSlideChange = e => {
-            console.log(e.activeIndex);
             activeIndex.value = e.activeIndex;
+            useStore.setHeaders(e.activeIndex);
         };
         return {
             onSlideChange,
@@ -54,6 +60,7 @@ export default {
     z-index: 10;
     background: transparent;
 }
+
 .swiper-container-main {
     height: 100%;
 }

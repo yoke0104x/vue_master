@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@element-plus/icons-vue": "^2.0.4",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "d3": "^7.2.1",
@@ -24,7 +26,6 @@
     "three": "^0.135.0",
     "three-orbit-controls": "^82.1.0",
     "vue": "^3.2.37",
-    "vue-count-to": "^1.0.13",
     "vue-seamless-scroll": "^1.1.23"
   },
   "devDependencies": {
