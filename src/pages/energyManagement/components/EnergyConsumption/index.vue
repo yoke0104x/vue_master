@@ -1,5 +1,6 @@
 <script setup>
 import composition from "./composition";
+import energyContent from "./energyContent";
 </script>
 
 <template>
@@ -7,7 +8,9 @@ import composition from "./composition";
         <div class="energy-content-item energy-content-left">
             <composition />
         </div>
-        <div class="energy-content-c"></div>
+        <div class="energy-content-c">
+            <energyContent />
+        </div>
         <div class="energy-content-item energy-content-right"></div>
     </div>
 </template>
