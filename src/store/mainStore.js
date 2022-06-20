@@ -5,7 +5,7 @@
  */
 
 import { defineStore } from "pinia";
-import { getTitle } from "@/api";
+import { getEnergy1, getTargetData, getTitle } from "@/api";
 
 export const useMainStore = defineStore({
     id: "main",
@@ -13,6 +13,8 @@ export const useMainStore = defineStore({
         return {
             minHeaderTitles: [],
             pageTitle: "",
+            targetList: [],
+            energyList: [],
         };
     },
     actions: {
@@ -21,6 +23,8 @@ export const useMainStore = defineStore({
                 const res = await getTitle();
                 if (res?.code === 0) {
                     this.minHeaderTitles = res.data;
+                    await this.setTargetDataFn();
+                    await this.getEnergyFn();
                 }
             } catch (e) {
                 return new Error(e);
@@ -29,7 +33,26 @@ export const useMainStore = defineStore({
         setHeaders(index) {
             const data = [2, 6, 8, 11];
             this.pageTitle = this.minHeaderTitles?.find(el => el.type === data?.[index])?.title;
-            console.log(this.pageTitle);
+        },
+        async setTargetDataFn() {
+            try {
+                const res = await getTargetData();
+                if (res?.code === 0) {
+                    this.targetList = res.data;
+                }
+            } catch (e) {
+                return new Error(e);
+            }
+        },
+        async getEnergyFn() {
+            try {
+                const res = await getEnergy1();
+                if (res?.code === 0) {
+                    this.energyList = res.data ?? [];
+                }
+            } catch (e) {
+                return new Error(e);
+            }
         },
     },
 });
