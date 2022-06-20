@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Chart from "@/components/chart/Chart";
+import Chart from "../chart/Chart";
 export default {
   name: "ChartsCard",
   components: {Chart},

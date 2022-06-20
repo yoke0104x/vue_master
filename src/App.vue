@@ -5,8 +5,13 @@
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
+
                 <swiper-slide>Slide 2</swiper-slide>
-                <swiper-slide>Slide 3</swiper-slide>
+
+                <swiper-slide>
+                  <CarbonEmissionManagement/>
+                </swiper-slide>
+
                 <swiper-slide>
                     <EnergyManagement />
                 </swiper-slide>
@@ -20,6 +25,7 @@ import "@/assets/css/reset.css";
 import "@/assets/css/custom-animation.css";
 import FirstScreenPage from "@/pages/firstScreenPage";
 import EnergyManagement from "@/pages/energyManagement";
+import CarbonEmissionManagement from "@/pages/carbonEmissionManagement";
 import Layout from "@/components/layout";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
@@ -31,6 +37,7 @@ export default {
     components: {
         FirstScreenPage,
         EnergyManagement,
+        CarbonEmissionManagement,
         Layout,
         Swiper,
         SwiperSlide,

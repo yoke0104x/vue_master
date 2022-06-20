@@ -1,13 +1,26 @@
+<script setup>
+import LeftScrollTable from "./components/leftScrollTable";
+
+</script>
+
+
 <template>
+
+  <content-left>
+    <LeftScrollTable/>
+  </content-left>
+
+  <content-center>
+    2
+  </content-center>
+
+  <content-right>
+    3
+  </content-right>
 
 </template>
 
-<script>
-export default {
-  name: "index"
-}
-</script>
+<style scoped lang="less">
 
-<style scoped>
 
 </style>
