@@ -1,6 +1,6 @@
 <template>
-  <BarChart v-if="chartInfo.type === CHARTS_TYPE.BAR" :data="chartData"/>
-  <LineChart v-else-if="chartInfo.type === CHARTS_TYPE.LINE"/>
+  <BarChart v-if="chartInfo.type === CHARTS_TYPE.BAR" :data="chartInfo"/>
+  <LineChart v-else-if="chartInfo.type === CHARTS_TYPE.LINE" :data="chartInfo"/>
 </template>
 
 <script>

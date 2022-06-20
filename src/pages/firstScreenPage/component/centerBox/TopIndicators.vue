@@ -1,12 +1,12 @@
 <template>
   <div class="top-indicators-container">
-    <div class="top-indicators-item" v-for="(item, index) in list" :key="index">
+    <div class="top-indicators-item" v-for="(item, index) in topIndicatorsTaskList" :key="index">
       <div class="icon-box">
         <img :src="item.icon" alt=""/>
       </div>
       <div class="detail-wrap">
-        <div class="detail-target" :style="{color: item.color}">{{topIndicatorsTaskInfo.data?.[index]?.target}}<span class="detail-unit">{{topIndicatorsTaskInfo.data?.[index]?.unit}}</span></div>
-        <div class="detail-name">{{topIndicatorsTaskInfo.data?.[index]?.customer}}</div>
+        <div class="detail-target" :style="{color: item.color}">{{item.target}}<span class="detail-unit">{{item.unit}}</span></div>
+        <div class="detail-name">{{item.customer}}</div>
       </div>
     </div>
   </div>
@@ -21,46 +21,13 @@ export default {
   data(){
     return({
         list: [
-          {
-            icon: require('@/assets/images/p1-center-icon-1.png'),
-            color: '#43E086',
-            customer: '工业生产总值',
-            target: 784,
-            unit: '亿元 +',
-          },
-          {
-            icon: require('@/assets/images/p1-center-icon-2.png'),
-            color: '#FFCB4D',
-            customer: '工业生产总值',
-            target: 784,
-            unit: '亿元 +'
-          },
-          {
-            icon: require('@/assets/images/p1-center-icon-3.png'),
-            color: '#4ED8F6',
-            customer: '工业生产总值',
-            target: 784,
-            unit: '亿元 +'
-          },
-          {
-            icon: require('@/assets/images/p1-center-icon-4.png'),
-            color: '#5AD0C5',
-            customer: '工业生产总值',
-            target: 784,
-            unit: '亿元 +'
-          }
+
         ]
     })
   },
   computed: {
-    ...mapState(useFirstPageStore, ['topIndicatorsTaskInfo'])
-  },
-  // methods: {
-  //   formatTask: function (){
-  //     const taskData = this.topIndicatorsTaskInfo?.data || [];
-  //     this.list = this.list.map((item, index) => Object.assign(item, ...taskData[index]))
-  //   }
-  // },
+    ...mapState(useFirstPageStore, ['topIndicatorsTaskList'])
+  }
 }
 </script>
 

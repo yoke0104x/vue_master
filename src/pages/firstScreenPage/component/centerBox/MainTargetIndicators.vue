@@ -1,7 +1,7 @@
 <template>
   <div class="main-target">
     <div class="title-wrap">
-      <TitleCard :title="name"/>
+      <TitleCard :title="titles?.[1]"/>
     </div>
 
     <div class="main-target-name">{{target}}</div>
@@ -31,17 +31,21 @@
 import TitleCard from "@/pages/firstScreenPage/component/centerBox/TitleCard";
 import TextScroll from "@/components/textScroll/TextScroll";
 import { ElProgress } from 'element-plus'
+import {mapState} from "pinia";
+import {useFirstPageStore} from "@/store";
 
 export default {
   name: "MainTargetIndicators",
   components: {TitleCard, ElProgress, TextScroll},
   data(){
     return({
-      name: '2022年主要目标指标',
       target: '保底890亿、力争突破900亿',
       scrollText: '力争保持全市第一          力争保持全市第一梯队\n' +
           '力争超过全市平均   力争保持招商引资引领姿态'
     })
+  },
+  computed: {
+    ...mapState(useFirstPageStore, [ 'titles'])
   }
 }
 </script>

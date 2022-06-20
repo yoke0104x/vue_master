@@ -1,12 +1,12 @@
 <template>
   <div class="main-eco-container">
     <div class="title-wrap">
-      <TitleCard :title="name"/>
+      <TitleCard :title="titles?.[0]"/>
     </div>
     <div class="main-eco-list">
       <div
           class="main-eco-list-item"
-          v-for="(item, index) in mapTaskData.list"
+          v-for="(item, index) in mapTaskData"
           :key="index"
       >
         <div class="main-eco-item-target">{{item.indicatorsValue}}</div>
@@ -26,13 +26,8 @@ import TitleCard from "@/pages/firstScreenPage/component/centerBox/TitleCard";
 export default {
   name: "MainEconomicIndicators",
   components: {TitleCard},
-  data(){
-    return({
-      name: '2021年主要经济指标',
-    })
-  },
   computed: {
-    ...mapState(useFirstPageStore, ['mapTaskData'])
+    ...mapState(useFirstPageStore, ['mapTaskData', 'titles'])
   }
 }
 </script>

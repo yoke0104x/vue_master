@@ -1,8 +1,8 @@
 <template>
   <div class="chart-card-box">
-    <div class="chart-title">{{chartData?.targetName}}</div>
+    <div class="chart-title">{{chartInfo?.targetName}}</div>
     <div class="chart">
-      <Chart :chartInfo="chartInfo" :chartData="chartData"/>
+      <Chart :chartInfo="chartInfo"/>
     </div>
   </div>
 </template>
@@ -12,7 +12,7 @@ import Chart from "@/components/chart/Chart";
 export default {
   name: "ChartsCard",
   components: {Chart},
-  props: ['chartInfo', 'chartData'],
+  props: ['chartInfo'],
 }
 </script>
 

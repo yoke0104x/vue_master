@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper initial-slide="3" class="swiper-container-main" @slideChange="onSlideChange">
+            <swiper class="swiper-container-main" @slideChange="onSlideChange">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
@@ -23,7 +23,7 @@ import EnergyManagement from "@/pages/energyManagement";
 import Layout from "@/components/layout";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
-import { onMounted, ref } from "vue";
+import {onMounted, ref, watch} from "vue";
 import { useMainStore } from "@/store";
 
 export default {
@@ -40,8 +40,13 @@ export default {
         const useStore = useMainStore();
         const onSlideChange = e => {
             activeIndex.value = e.activeIndex;
-            useStore.setHeaders(e.activeIndex);
+            // useStore.setHeaders(e.activeIndex);
         };
+
+        watch(() => [activeIndex.value, useStore.minHeaderTitles], (newInfo) => {
+          useStore.setHeaders(newInfo?.[0]);
+        }, {immediate: true})
+
         return {
             onSlideChange,
             activeIndex,
