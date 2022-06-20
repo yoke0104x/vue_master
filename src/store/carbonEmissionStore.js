@@ -5,7 +5,7 @@
 */
 
 import {defineStore} from "pinia";
-import {getCarbonEmission1} from "@/api";
+import {getCarbonEmission1, getCarbonEmission2} from "@/api";
 import { isEqual, map, find } from "lodash";
 import {useMainStore} from "@/store/mainStore";
 
@@ -17,6 +17,10 @@ export const useCarbonEmissionStore = defineStore({
                 loading: true,
                 data: [],
                 title: ''
+            },
+            carbonCharts: {
+                charts: [],
+                loading: true
             }
         })
     },
@@ -37,6 +41,17 @@ export const useCarbonEmissionStore = defineStore({
             const minHeaderTitles = useMainStore()?.minHeaderTitles;
             const TitleType = 10;
             this.carbonEmissions.title = find(minHeaderTitles, item => isEqual(item.type, TitleType))?.title ?? "";
+        },
+
+        //获取右边的四个charts数据
+        async getRightChartsData(){
+            const res = await getCarbonEmission2();
+            if(isEqual(res?.code, 0)){
+                this.carbonCharts = {
+                    loading: false,
+                    charts: res.data
+                }
+            }
         }
 
     }

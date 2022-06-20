@@ -93,7 +93,7 @@ const getOption = ({colors, xAxisValueList, yAxisValueList}) =>(
           show: false,
         },
         axisLabel: {
-          fontSize: 36,
+          fontSize: 24,
           color: getColor(1),
           padding: [1, 4, 5, 15]
         }
@@ -117,7 +117,7 @@ const getOption = ({colors, xAxisValueList, yAxisValueList}) =>(
           show: false
         },
         axisLabel: {
-          fontSize: 36,
+          fontSize: 12,
           margin: 2,
           color: getColor(1),
         },
@@ -202,7 +202,7 @@ const getOption = ({colors, xAxisValueList, yAxisValueList}) =>(
           normal: {
             show: true,
             position: 'top',
-            fontSize: 40,
+            fontSize: 20,
             color: getColor(1),
             offset: [10, -25]
           }

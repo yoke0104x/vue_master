@@ -1,5 +1,6 @@
 <script setup>
 import LeftScrollTable from "./components/leftScrollTable";
+import RightCharts from './components/rightCharts';
 
 </script>
 
@@ -7,7 +8,7 @@ import LeftScrollTable from "./components/leftScrollTable";
 <template>
 
   <content-left>
-    <LeftScrollTable/>
+    <left-scroll-table/>
   </content-left>
 
   <content-center>
@@ -15,7 +16,7 @@ import LeftScrollTable from "./components/leftScrollTable";
   </content-center>
 
   <content-right>
-    3
+    <right-charts/>
   </content-right>
 
 </template>
