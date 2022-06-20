@@ -20,6 +20,8 @@ const data = {
         <div class="constitute">
             <TitleCard title="终端能耗构成" />
         </div>
+
+        <div class="chart" ref="comPositionRef"></div>
     </div>
 </template>
 

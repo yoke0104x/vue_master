@@ -27,6 +27,7 @@ const props = defineProps({
 // 计算进度条的百分比
 const increase = computed(() => props.data.increase.replace("%", "") * 1);
 
+// 字体的颜色
 const color = computed(() => {
     return props.colors?.[1];
 });
@@ -94,6 +95,7 @@ document.querySelector(":root").style.setProperty("--el-fill-color-light", "#000
     height: calc(120px * @measureSize);
     animation: 2s ease 3s 1 normal both running bounceInRight;
 }
+
 .icon {
     width: calc(114px * @measureSize);
     height: calc(114px * @measureSize);
