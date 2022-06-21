@@ -21,7 +21,6 @@ watchEffect(() => {
     state.loading = carbonEmissionStore.carbonCharts.loading;
     state.charts = getCharts(carbonEmissionStore.carbonCharts.charts);
   }
-  console.log('=========state:',carbonEmissionStore.carbonCharts.charts);
 })
 
 </script>

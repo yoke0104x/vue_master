@@ -5,7 +5,7 @@
 */
 
 import {defineStore} from "pinia";
-import {getCarbonEmission1, getCarbonEmission2} from "@/api";
+import {getCarbonEmission1, getCarbonEmission2, getCarbonEmission3} from "@/api";
 import { isEqual, map, find } from "lodash";
 import {useMainStore} from "@/store/mainStore";
 
@@ -21,7 +21,8 @@ export const useCarbonEmissionStore = defineStore({
             carbonCharts: {
                 charts: [],
                 loading: true
-            }
+            },
+            analysisList: []
         })
     },
     actions: {
@@ -52,7 +53,14 @@ export const useCarbonEmissionStore = defineStore({
                     charts: res.data
                 }
             }
-        }
+        },
 
+        //获取地图数据
+        async getAnalysisList(){
+            const res = await getCarbonEmission3();
+            // if(){
+            //
+            // }
+        }
     }
 })

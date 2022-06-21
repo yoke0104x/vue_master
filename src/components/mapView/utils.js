@@ -10,7 +10,7 @@ import polyline from "@/utils/polyline";
  * @param list
  */
 
-export const getMarkerList = (AMap, list = []) => {
+export const getMarkerList = (AMap, list = [], { markerIconConfig }) => {
 
     const getToolTipsContent = (item) => {
         return (
@@ -28,10 +28,10 @@ export const getMarkerList = (AMap, list = []) => {
 
     // 创建 AMap.Icon 实例：
     const icon = new AMap.Icon({
-        size: new AMap.Size(206, 254),    // 图标尺寸
-        image: require('@/assets/images/p1-map-marker-icon.png'),  // Icon的图像
+        size: new AMap.Size(markerIconConfig.width, markerIconConfig.height),    // 图标尺寸
+        image: markerIconConfig.url,  // Icon的图像
         // imageOffset: new AMap.Pixel(0, -60),  // 图像相对展示区域的偏移量，适于雪碧图等
-        imageSize: new AMap.Size(206, 254)   // 根据所设置的大小拉伸或压缩图片
+        imageSize: new AMap.Size(markerIconConfig.width, markerIconConfig.height)   // 根据所设置的大小拉伸或压缩图片
     });
 
     const newList = (Array.isArray(list) && list.filter(item => item.longitude && item.latitude)) || [];

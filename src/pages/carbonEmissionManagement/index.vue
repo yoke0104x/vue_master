@@ -1,6 +1,7 @@
 <script setup>
 import LeftScrollTable from "./components/leftScrollTable";
 import RightCharts from './components/rightCharts';
+import CarbonAnalysis from './components/carbonAnalysis/Index';
 
 </script>
 
@@ -12,7 +13,7 @@ import RightCharts from './components/rightCharts';
   </content-left>
 
   <content-center>
-    2
+    <carbon-analysis/>
   </content-center>
 
   <content-right>

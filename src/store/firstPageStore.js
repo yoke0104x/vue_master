@@ -6,7 +6,7 @@
 
 import { defineStore } from 'pinia'
 import { isEqual, isEmpty, slice, map, filter, sortBy, some } from 'lodash';
-import {getEconomic1, getEconomic2, getTargetData} from "@/api";
+import {getEconomic1, getEconomic2} from "@/api";
 import {CHARTS_TYPE} from "@/constants";
 import {useMainStore} from "@/store/mainStore";
 
@@ -50,10 +50,10 @@ export const useFirstPageStore = defineStore({
         },
 
         //地图上方指标的数据
-        async getMapTopIndicatorsTaskAction() {
-            const res = await getTargetData();
-            const resList = res?.data;
-            if(isEqual(res?.code, 0) && !isEmpty(resList)){
+        getMapTopIndicatorsTaskAction() {
+            const mainStore = useMainStore()
+            const resList = mainStore.targetList;
+            if(!isEmpty(resList)){
                 const initialList = [
                     {
                         icon: require('@/assets/images/p1-center-icon-1.png'),
@@ -72,7 +72,8 @@ export const useFirstPageStore = defineStore({
                         color: '#5AD0C5',
                     }
                 ];
-                this.topIndicatorsTaskList = map(slice(resList, 0, 4), (item, index) =>(
+                const TargetType = "1";
+                this.topIndicatorsTaskList = map(filter(resList, i => isEqual(i.type, TargetType)), (item, index) =>(
                     {...item, ...initialList[index]}
                 ))
             }

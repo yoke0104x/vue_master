@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper class="swiper-container-main" @slideChange="onSlideChange">
+            <swiper initial-slide="2" class="swiper-container-main" @slideChange="onSlideChange">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>

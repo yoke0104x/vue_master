@@ -16,25 +16,29 @@
 <script setup>
 import ChartBox from "@/pages/firstScreenPage/component/chartBox/ChartBox";
 import CenterBox from "@/pages/firstScreenPage/component/centerBox/CenterBox";
-import {useFirstPageStore} from "@/store";
-import {watchEffect, ref, onMounted, computed} from "vue";
+import {useFirstPageStore, useMainStore} from "@/store";
+import {watchEffect, onMounted, computed} from "vue";
+import { isEmpty } from 'lodash';
 
   const firstPageStore = useFirstPageStore();
+  const mainStore = useMainStore();
   const chartsInfo = computed(() => firstPageStore.chartsTaskInfo);
 
 
 
-// watchEffect(() => {
-  //   if(!firstPageStore.chartsTaskInfo.loading){
-  //     chartsInfo.value = firstPageStore.chartsTaskInfo;
-  //   }
-  // })
+  watchEffect(() => {
+    if(!isEmpty(mainStore.targetList)){
+      firstPageStore.getMapTopIndicatorsTaskAction();
+    }
+
+    if(!isEmpty(mainStore.minHeaderTitles)){
+      firstPageStore.getLeftAndRightTitActions();
+    }
+  })
 
   onMounted(() => {
     firstPageStore.getBarAndLinesTaskAction();
-    firstPageStore.getMapTopIndicatorsTaskAction();
     firstPageStore.getMapTaskList();
-    firstPageStore.getLeftAndRightTitActions();
   })
 </script>
 

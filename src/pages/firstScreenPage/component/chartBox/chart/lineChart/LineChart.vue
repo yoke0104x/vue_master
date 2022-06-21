@@ -1,5 +1,5 @@
 <template>
-  <div id="line-chart-container"/>
+  <div id="line-chart-container" ref="chart-view"/>
 </template>
 
 <script>
@@ -115,7 +115,7 @@ export default {
   },
   mounted() {
 
-    const chartDom = document.getElementById('line-chart-container');
+    const chartDom = this.$refs["chart-view"];
     const myChart = echarts.init(chartDom);
     myChart.setOption(defaultOption);
 
