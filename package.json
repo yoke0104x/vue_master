@@ -26,8 +26,7 @@
     "three": "^0.135.0",
     "three-orbit-controls": "^82.1.0",
     "vue": "^3.2.37",
-    "vue-seamless-scroll": "^1.1.23",
-    "vue3-seamless-scroll": "^1.2.0"
+    "vue-seamless-scroll": "^1.1.23"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
