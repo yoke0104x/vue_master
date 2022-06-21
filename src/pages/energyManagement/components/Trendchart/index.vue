@@ -1,8 +1,9 @@
 <script setup>
 import vueSeamless from "vue-seamless-scroll/src";
 import { ElRow, ElCol } from "element-plus";
-import { reactive, toRef, toRefs } from "vue";
+import { computed, reactive, toRef, toRefs } from "vue";
 import { getEnergy2 } from "@/api";
+import { useMainStore } from "@/store";
 const columns = [
     {
         title: "序号",
@@ -33,6 +34,7 @@ const columns = [
 const state = reactive({
     data: [],
 });
+const mainStore = useMainStore();
 
 // 获取园区企业能耗数据
 getEnergy2().then(res => {
@@ -41,12 +43,17 @@ getEnergy2().then(res => {
     }
 });
 
+// 获取页面title
+const title = computed(() => {
+    return mainStore.minHeaderTitles?.find(el => el.type === 15)?.title ?? "";
+})
+
 let { data } = toRefs(state);
 </script>
 
 <template>
     <div>
-        <div class="title">园区企业能耗涨幅</div>
+        <div class="title">{{ title }}</div>
         <div class="today-content">
             <div class="today-header">
                 <el-row>
@@ -68,19 +75,23 @@ let { data } = toRefs(state);
 
 <style lang="less" scoped>
 @import "../../../../global.less";
+
 .keyword {
     padding: calc(14px * @measureSize) 0;
 }
+
 .title {
     color: #fff;
     font-size: calc(28px * @measureSize);
     margin-left: calc(48px * @measureSize);
     margin-top: calc(20px * @measureSize);
 }
+
 .today-content {
     padding: 0 calc(30px * @measureSize);
     margin-top: calc(10px * @measureSize);
 }
+
 .el-col {
     text-align: center;
     overflow: hidden;
@@ -88,16 +99,19 @@ let { data } = toRefs(state);
     text-overflow: ellipsis;
     display: block;
 }
+
 .today-header {
     background: rgba(255, 255, 255, 0.3);
     color: #ccc;
     padding: calc(25px * @measureSize) 0;
     font-size: calc(14px * @measureSize);
 }
+
 .today-key-c {
     overflow: hidden;
     height: 90%;
 }
+
 .ti-record-mail {
     color: #fff;
     font-size: calc(14px * @measureSize);

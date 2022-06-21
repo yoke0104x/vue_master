@@ -7,7 +7,6 @@ const useStore = useMainStore();
 const data = computed(() => {
     return useStore.targetList
         ?.filter(el => {
-            console.log(el, ".......");
             return el.id === "35" || el.id === "36";
         })
         ?.map(el => {

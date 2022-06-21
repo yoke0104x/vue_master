@@ -1,6 +1,7 @@
 <script setup>
 import composition from "./composition";
 import energyContent from "./energyContent";
+import energyClassification from "./energyClassification";
 </script>
 
 <template>
@@ -11,7 +12,9 @@ import energyContent from "./energyContent";
         <div class="energy-content-c">
             <energyContent />
         </div>
-        <div class="energy-content-item energy-content-right"></div>
+        <div class="energy-content-item energy-content-right">
+          <energyClassification />
+        </div>
     </div>
 </template>
 

@@ -1,14 +1,14 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper initial-slide="3" class="swiper-container-main" @slideChange="onSlideChange">
+            <swiper initial-slide="0" class="swiper-container-main" @slideChange="onSlideChange">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
                 <swiper-slide>Slide 2</swiper-slide>
                 <swiper-slide>Slide 3</swiper-slide>
                 <swiper-slide>
-                    <EnergyManagement />
+                   <EnergyManagement />
                 </swiper-slide>
             </swiper>
         </div>

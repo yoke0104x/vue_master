@@ -14,11 +14,9 @@ const props = defineProps({
 const state = reactive({
     options: {},
 });
-console.log(props.options, ".......");
 watch(
     () => props.options,
     val => {
-        console.log(val, "........");
         state.options = val;
         myCharts.value.setOption(val);
     },
