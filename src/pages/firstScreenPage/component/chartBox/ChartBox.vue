@@ -1,28 +1,25 @@
 <template>
-    <div class="chart-box">
-      <div v-if="chartsTaskInfo?.loading">loading...</div>
-      <div v-else class="chart-card" v-for="(item, index) in chartsInfo.list" :key="index">
-        <ChartsCard :chartInfo="item" :chartData="chartsTaskInfo?.data?.[chartsInfo.taskIndex[index]]" />
+    <Loading :loading="props.loading">
+      <div class="chart-box">
+        <div class="chart-card" v-for="(item, index) in props.list" :key="index">
+          <ChartsCard :chartInfo="item"/>
+        </div>
       </div>
-    </div>
+    </Loading>
 </template>
 
-<script>
-import ChartsCard from "@/pages/firstScreenPage/component/chartBox/chartsCard/ChartsCard";
-import {useFirstPageStore} from "@/store";
-import {mapState} from "pinia";
-
-export default {
-  name: "LeftBox",
-  components: {ChartsCard},
-  props: ['chartsInfo'],
-  computed: {
-  ...mapState(useFirstPageStore, ['chartsTaskInfo'])
-  },
-  mounted() {
-
-  },
-}
+<script setup>
+  import ChartsCard from "@/pages/firstScreenPage/component/chartBox/chartsCard/ChartsCard";
+  const props = defineProps({
+    loading: {
+      type: Boolean,
+      default: () => true
+    },
+    list: {
+      type: Array,
+      default: () => []
+    }
+  })
 </script>
 
 <style scoped lang="less">

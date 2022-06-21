@@ -1,14 +1,19 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper initial-slide="0" class="swiper-container-main" @slideChange="onSlideChange">
+            <swiper class="swiper-container-main" @slideChange="onSlideChange">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
+
                 <swiper-slide>Slide 2</swiper-slide>
-                <swiper-slide>Slide 3</swiper-slide>
+
                 <swiper-slide>
-                   <EnergyManagement />
+                  <CarbonEmissionManagement/>
+                </swiper-slide>
+
+                <swiper-slide>
+                    <EnergyManagement />
                 </swiper-slide>
             </swiper>
         </div>
@@ -20,10 +25,11 @@ import "@/assets/css/reset.css";
 import "@/assets/css/custom-animation.css";
 import FirstScreenPage from "@/pages/firstScreenPage";
 import EnergyManagement from "@/pages/energyManagement";
+import CarbonEmissionManagement from "@/pages/carbonEmissionManagement";
 import Layout from "@/components/layout";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
-import { onMounted, ref } from "vue";
+import {onMounted, ref, watch} from "vue";
 import { useMainStore } from "@/store";
 
 export default {
@@ -31,6 +37,7 @@ export default {
     components: {
         FirstScreenPage,
         EnergyManagement,
+        CarbonEmissionManagement,
         Layout,
         Swiper,
         SwiperSlide,
@@ -40,8 +47,13 @@ export default {
         const useStore = useMainStore();
         const onSlideChange = e => {
             activeIndex.value = e.activeIndex;
-            useStore.setHeaders(e.activeIndex);
+            // useStore.setHeaders(e.activeIndex);
         };
+
+        watch(() => [activeIndex.value, useStore.minHeaderTitles], (newInfo) => {
+          useStore.setHeaders(newInfo?.[0]);
+        }, {immediate: true})
+
         return {
             onSlideChange,
             activeIndex,

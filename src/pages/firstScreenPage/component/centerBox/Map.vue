@@ -1,6 +1,6 @@
 <template>
     <div class="map-wrap">
-        <div class="map-title">{{ title }}</div>
+      <second-title :name="title" :class="['map-title']"/>
         <div id="p1-map-container">
             <img class="map-bg" src="../../../../assets/images/p1-map-bg.png" alt="" />
         </div>
@@ -35,7 +35,7 @@ export default {
                 plugins: [""], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
             })
                 .then(AMap => {
-                    const markers = getMarkerList(AMap, this.mapTaskData?.list);
+                    const markers = getMarkerList(AMap, this.mapTaskData);
 
                     this.map = new AMap.Map("p1-map-container", {
                         mapStyle: 'amap://styles/fdbb98face95063a17e8ed639ad2027b',
@@ -72,19 +72,7 @@ export default {
     animation: 1000ms ease 3000ms 1 normal both running fadeIn;
 
     .map-title {
-        width: calc(675px * @measureSize);
-        height: calc(76px * @measureSize);
-        color: #19c0f6;
-        font-family: jed;
-        font-weight: bold;
-        font-size: calc(40px * @measureSize);
-        line-height: 2;
-        letter-spacing: calc(4px * @measureSize);
-        text-align: center;
-        background: url("../../../../assets/images/p1-map-title-bg.png") no-repeat;
-        background-size: contain;
         margin: 0 auto calc(10px * @measureSize);
-        animation: 1000ms ease 4000ms 1 normal both running fadeInDown;
     }
 
     #p1-map-container {

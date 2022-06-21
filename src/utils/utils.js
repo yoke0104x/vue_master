@@ -39,6 +39,18 @@ function setAnimation(element, animation) {
     element.style.animation = action;
 }
 
+const getTitleByType = (list, type = 0) => {
+    if(Array.isArray(list)){
+        const target =  list.find(item => item.type === type);
+        return target?.title || '';
+    }
+
+    return '';
+}
+
 export {
+    getTitleByType,
     playAnimation
 }
+
+
