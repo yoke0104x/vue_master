@@ -1,11 +1,11 @@
 <template>
-  <div class="name"><span class="triangle"/><span>{{title}}</span></div>
+  <div class="name"><span class="triangle"/><span>{{title}}</span><span class="subText">{{subText}}</span></div>
 </template>
 
 <script>
 export default {
   name: "TitleCard",
-  props: ['title']
+  props: ['title',"subText"]
 }
 </script>
 
@@ -28,5 +28,9 @@ export default {
     margin-right: calc(23px * @measureSize);
   }
 }
-
+.subText{
+  font-size: calc(24px * @measureSize);
+  margin-left: calc(10px * @measureSize);
+  margin-top: calc(10px * @measureSize);
+}
 </style>

@@ -22,6 +22,10 @@ const props = defineProps({
         type: String,
         default: ["#CEE618", "#FEDB65"],
     },
+    width: {
+        type: String,
+        default: 111,
+    },
 });
 
 // 计算进度条的百分比
@@ -37,7 +41,8 @@ document.querySelector(":root").style.setProperty("--el-fill-color-light", "#000
 
 <template>
     <div class="main" :class="props?.type === 'left' ? 'left' : 'right'">
-        <div class="icon">
+        <div v-if="props.width == 0"></div>
+        <div v-else class="icon">
             <slot name="icon"></slot>
         </div>
         <div class="content">
@@ -50,10 +55,10 @@ document.querySelector(":root").style.setProperty("--el-fill-color-light", "#000
             </div>
         </div>
         <div class="link-ratio">
-            <el-progress type="circle" :color="colors?.[1]" stroke-width="20" :percentage="Math.floor(Math.abs(increase))" width="272">
+            <el-progress type="circle" :color="colors?.[1]" stroke-width="20" :percentage="Math.abs(increase)" width="272">
                 <template v-slot="data">
                     <div class="icon-font">
-                        <el-icon v-if="increase >= 1"><Top /></el-icon>
+                        <el-icon v-if="increase >= 0"><Top /></el-icon>
                         <el-icon v-else-if="increase < 0"><Bottom /></el-icon>
                         <el-icon v-else-if="increase === 0"></el-icon>
                     </div>

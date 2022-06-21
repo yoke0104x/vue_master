@@ -9,9 +9,9 @@ const state = reactive({
     option: {},
 });
 const mainStore = useMainStore();
-const lineRatioData = computed(() => mainStore.targetList?.find(el => el.id === "33"));
-const echartData = computed(() => mainStore.energyList?.filter(el => el.categoryType === "1"));
-const title = computed(() => mainStore.minHeaderTitles?.find(el => el.type === 13)?.title ?? "");
+const lineRatioData = computed(() => mainStore.targetList?.find(el => el.id === "34"));
+const echartData = computed(() => mainStore.energyList?.filter(el => el.categoryType === "3"));
+const title = computed(() => mainStore.minHeaderTitles?.find(el => el.type === 16)?.title ?? "");
 watch(
     echartData,
     val => {
@@ -30,7 +30,7 @@ function setOption(val) {
         }));
 
         var datas = [];
-        var color = ["#EFEA53", "#00DCAC", "#73BAE8", "#33BAFD"];
+        var color = ["#00ffff", "#00cfff", "#006ced", "#ffe000", "#ffa800", "#ff5b00", "#ff3000"];
         for (var i = 0; i < legendData.length; i++) {
             datas.push(
                 {
@@ -86,7 +86,7 @@ function setOption(val) {
         let options = {
             color: color,
             title: {
-                text: "终端能耗构成",
+                text: "园区能源消费分布",
                 top: "48%",
                 textAlign: "center",
                 left: "49%",
@@ -102,17 +102,15 @@ function setOption(val) {
             legend: {
                 itemHeight: 20 * 3,
                 itemWidth: 20 * 3,
-                icon: "rect",
-                orient: "horizontal",
+                icon: "circle",
                 data: legendData?.map(el => el.name),
-                top: 0,
-                left: "center",
+                left: "left",
                 textStyle: {
-                    color: "#fff",
+                    color: "#52A1DB",
                     fontSize: 20 * 3,
-                    padding: [0, 0, 0, 20 * 2],
+                    padding: [0, 103 * 3, 30, 10 * 2],
                 },
-                itemGap: 203,
+                itemGap: 100,
             },
             toolbox: {
                 show: false,
@@ -133,23 +131,33 @@ function setOption(val) {
             title = [
                 {
                     text: legendData[index].name,
-                    top: "38%",
+                    top: "34%",
                     textAlign: "center",
                     left: "50%",
                     textStyle: {
-                        color: color[index],
-                        fontSize: 25 * 3,
+                        color: "#3ED5DF",
+                        fontSize: 32 * 3,
                     },
                 },
                 {
                     text: percent + "%",
-                    top: "48%",
+                    top: "43%",
                     textAlign: "center",
                     left: "50%",
                     textStyle: {
-                        color: color[index],
-                        fontSize: 60 * 3,
-                        fontWeight: 800,
+                        color: "#3ED5DF",
+                        fontSize: 80 * 3,
+                        fontWeight: "bolder",
+                    },
+                },
+                {
+                    text: legendData[index].value,
+                    top: "59%",
+                    textAlign: "center",
+                    left: "50%",
+                    textStyle: {
+                        color: "#3ED5DF",
+                        fontSize: 32 * 3,
                     },
                 },
             ];
@@ -163,33 +171,34 @@ function setOption(val) {
 </script>
 
 <template>
-    <div class="center-box-left">
+    <div class="center-box-right">
         <div class="card-ratio">
-            <LinkRatio :data="lineRatioData" />
+            <LinkRatio :data="lineRatioData" type="right" width="0" />
         </div>
 
         <div class="constitute">
-            <TitleCard :title="title" />
+<!--          <TitleCard :title="title" subText="（单位：吨标煤）" />-->
+          <TitleCard :title="title" />
         </div>
 
         <charts class="card-echarts" height="1800" :options="state.option" />
     </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 @import "../../../../global.less";
-.center-box-left {
-    height: 100%;
+.center-box-right {
+    padding: 0 0 0 calc(60px * @measureSize);
+    .icon {
+        width: 0;
+    }
 }
 .card-ratio {
     display: flex;
-    justify-content: flex-end;
     margin-top: calc(76px * @measureSize);
 }
 .constitute {
     margin-top: calc(86px * @measureSize);
-    display: flex;
-    justify-content: center;
 }
 .card-echarts {
     margin-top: calc(67px * @measureSize);
