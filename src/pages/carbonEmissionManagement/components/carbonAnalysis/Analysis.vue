@@ -82,6 +82,11 @@ const getChartInfo = () => {
   return info;
 }
 
+const handleChangeCurrentId = (id) => {
+  state.currentId = id;
+}
+
+
 
 </script>
 
@@ -89,7 +94,10 @@ const getChartInfo = () => {
 <template>
   <div class="analysis-container">
     <analysis-left :detailInfo="getCurrentDetail()"/>
-    <analysis-center/>
+    <analysis-center
+        :currentId="state.currentId"
+        :onChangeCurrentId="handleChangeCurrentId"
+    />
     <analysis-right :detailInfo="getChartInfo()"/>
   </div>
 

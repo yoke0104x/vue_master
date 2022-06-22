@@ -1,7 +1,13 @@
 <template>
     <div class="map-wrap">
       <second-title :name="title" :class="['map-title']"/>
-        <MapView :data="mapTaskData" :markerIconConfig="markerIconConfig" id="firstPage"/>
+        <MapView
+            :currentId="currentId"
+            :data="mapTaskData"
+            :markerConfig="markerConfig"
+            id="firstPage"
+            :onChangeCurrentId="handleChangeCurrentId"
+        />
     </div>
 </template>
 
@@ -16,17 +22,29 @@ export default {
     data() {
         return {
             title: "德阳经济技术开发区",
-            markerIcon: require('@/assets/images/p1-map-marker-icon.png'),
-            markerIconConfig: {
+            markerConfig: {
                 url: require('@/assets/images/p1-map-marker-icon.png'),
                 width: 206,
-                height: 254
-            }
+                height: 254,
+                showTarget: true,
+                toolTipsName: 'customer'
+            },
+            currentId: null
         };
     },
     computed: {
         ...mapState(useFirstPageStore, ["mapTaskData"]),
     },
+    watch: {
+      mapTaskData: function (val){
+        this.currentId = val[0]?.id;
+      }
+    },
+  methods: {
+      handleChangeCurrentId(id){
+        this.currentId = id;
+      }
+  }
 };
 </script>
 

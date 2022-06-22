@@ -17,10 +17,14 @@ export default {
 
 .name-container{
   height: calc(62px * @measureSize);
+  padding: 0 calc(15px * @measureSize);
   background: #124A8E;
   display: flex;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   .name{
     color: #4DFFFF;

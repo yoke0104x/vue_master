@@ -1,6 +1,12 @@
 <template>
 <div class="map-container">
-  <map-view id="carbon" :data="data" :markerIconConfig="state.markerIconConfig"/>
+  <map-view
+      id="carbon"
+      :data="data"
+      :markerConfig="state.markerConfig"
+      :currentId="props.currentId"
+      :onChangeCurrentId="props.onChangeCurrentId"
+  />
 </div>
 </template>
 
@@ -13,11 +19,33 @@ const carbonEmissionStore = useCarbonEmissionStore();
 
 const data = computed(() => carbonEmissionStore.analysisList)
 
+const props = defineProps({
+  currentId: String,
+  onChangeCurrentId: Function
+})
+
 const state = reactive({
-  markerIconConfig: {
-    url: require('@/assets/images/p1-map-marker-icon.png'),
-    width: 206,
-    height: 254
+  markerConfig: {
+    url: '',
+    width: 162,
+    height: 180,
+    showTarget: false,
+    toolTipsName: 'companyName',
+    handleGetIcon: (info) => {
+      if(info.id === props.currentId){
+        return require('@/assets/images/carbon-marker-selected.png')
+      }
+      switch (info?.categoryName){
+        case '大型':
+          return require('@/assets/images/carbon-marker-big.png');
+        case '中型':
+          return require('@/assets/images/carbon-marker-middle.png');
+        case '小型':
+          return require('@/assets/images/carbon-marker-small.png');
+        default:
+            return require('@/assets/images/carbon-marker-big.png')
+      }
+    }
   }
 })
 

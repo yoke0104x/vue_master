@@ -50,6 +50,10 @@ export default {
     background: #0B3A74;
     margin-left: calc(36px * @measureSize);
     margin-right: calc(17px * @measureSize);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 calc(15px * @measureSize);
   }
 
   .unit-box{
