@@ -25,7 +25,7 @@ import {getMarkerList, setPolyLine} from "./utils";
 // }
 export default {
   name: "Map",
-  props: ['data', 'markerIconConfig'],
+  props: ['id', 'data', 'markerIconConfig'],
   setup() {
     const map = shallowRef(null);
     return {
@@ -45,7 +45,7 @@ export default {
             }
             const markers = getMarkerList(AMap, this.data, config);
 
-            this.map = new AMap.Map("map-view", {
+            this.map = new AMap.Map(`map-view-${this.id}`, {
               mapStyle: 'amap://styles/fdbb98face95063a17e8ed639ad2027b',
               //设置地图容器id
               viewMode: "3D", //是否为3D地图模式
@@ -71,7 +71,7 @@ export default {
 
 <template>
 
-  <div id="map-view">
+  <div class="map-view" :id="[`map-view-${id}`]">
     <img class="map-bg" src="../../assets/images/p1-map-bg.png" alt="" />
   </div>
 </template>
@@ -79,9 +79,10 @@ export default {
 <style scoped lang="less">
 @import "../../global";
 
-#map-view{
+.map-view{
   height: 100%;
   width: 100%;
+  position: relative;
 
   .map-bg {
     //pointer-events: none;

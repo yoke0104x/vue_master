@@ -1,7 +1,7 @@
 <template>
     <div class="map-wrap">
       <second-title :name="title" :class="['map-title']"/>
-        <MapView :data="mapTaskData" :markerIconConfig="markerIconConfig"/>
+        <MapView :data="mapTaskData" :markerIconConfig="markerIconConfig" id="firstPage"/>
     </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card-wrap">
-    <div class="name-box">单位工业产值碳排放量</div>
-    <div class="target-box">装备制造业</div>
-    <div class="unit-box">tce</div>
+    <div class="name-box">{{name}}</div>
+    <div class="target-box" :style="getColorStyle()">{{value}}</div>
+    <div class="unit-box" v-if="unit" :style="getColorStyle()">{{unit}}</div>
   </div>
 
 </template>
@@ -10,6 +10,12 @@
 <script>
 export default {
   name: "DetailCard",
+  props: ['name', 'value', 'unit', 'color'],
+  methods: {
+    getColorStyle(){
+      return ({color: this.color})
+    }
+  }
 }
 </script>
 

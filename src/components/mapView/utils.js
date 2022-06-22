@@ -42,6 +42,7 @@ export const getMarkerList = (AMap, list = [], { markerIconConfig }) => {
             icon: icon, // 添加 Icon 实例
             title: '北京',
             zoom: 13,
+        visible: true,
             // content: 'tttttttttttttttt'
             label: {
                 content: getToolTipsContent(item),
