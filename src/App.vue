@@ -58,7 +58,7 @@ export default {
         }, {immediate: true})
 
         onMounted(() => {
-          const ws = new WebSocket(`ws://${window.location.host}/dybigs/webSocket/1`);
+          const ws = new WebSocket(`ws://${window.location.host}/dybigs/webSocket/screen`);
           //测试环境的
           // const ws = new WebSocket('ws://121.36.46.110:16993/dybigs/webSocket/screen');
 
