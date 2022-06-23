@@ -162,12 +162,13 @@ export default {
 
   /deep/ .amap-marker-label {
     border: none;
-    z-index: 998;
+    padding: 0;
 
     .tips-container {
       width: calc(229px * @measureSize);
       height: calc(108px * @measureSize);
-      background: url("../../assets/images/p1-map-tips-bg.png") no-repeat;
+      //background: url("../../assets/images/p1-map-tips-bg.png") no-repeat;
+      background: #0096FF;
       background-size: cover;
       padding: calc(15px * @measureSize) calc(17px * @measureSize) calc(5px * @measureSize);
       display: flex;

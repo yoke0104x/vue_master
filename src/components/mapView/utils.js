@@ -42,20 +42,29 @@ export const getMarkerList = (AMap, list = [], { markerConfig }, {currentId, onM
 
     return list.map(item => {
 
-        const markerItem = new AMap.Marker({
+        const option = {
             position: new AMap.LngLat(item.longitude, item.latitude),
             // offset: new AMap.Pixel(-10, -10),
             icon: getIcon(item), // 添加 Icon 实例
             zoom: 13,
+            bubble: false,
+            clickable: true,
+            zIndex: 1,
             // content: 'tttttttttttttttt'
-            label: {
-                // content: getToolTipsContent(item),
-                content: currentId === item.id ? getToolTipsContent(item) : '',
+        };
+
+        if(currentId === item.id){
+            option.label = {
+                content: getToolTipsContent(item),
                 direction: 'top'
-            }
-        })
+            };
+            option.zIndex = 100;
+        }
+
+        const markerItem = new AMap.Marker(option)
         //TODO swiper 会影响marker的点击,待处理
         markerItem.on('click', (e) => {
+            console.log('===========e.marker:', e);
             onMarketItemClick(item.id)
             // e.target?.setLabel({
             //     content: getToolTipsContent(item)
