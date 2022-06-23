@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper initial-slide="0" class="swiper-container-main" @slideChange="onSlideChange">
+            <swiper initial-slide='0' class="swiper-container-main" @slideChange="onSlideChange" @swiper="handleGetSwiper">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
@@ -44,21 +44,42 @@ export default {
     },
     setup() {
         const activeIndex = ref(0);
+        const mySwiper = ref(null);
         const useStore = useMainStore();
         const onSlideChange = e => {
             activeIndex.value = e.activeIndex;
             // useStore.setHeaders(e.activeIndex);
         };
 
+        const handleGetSwiper = swiper => mySwiper.value = swiper;
+
         watch(() => [activeIndex.value, useStore.minHeaderTitles], (newInfo) => {
           useStore.setHeaders(newInfo?.[0]);
         }, {immediate: true})
 
+        onMounted(() => {
+          const ws = new WebSocket(`ws://${window.location.host}/dybigs/webSocket/screen`);
+          //测试环境的
+          // const ws = new WebSocket('ws://121.36.46.110:16993/dybigs/webSocket/screen');
+
+          ws.onopen = function () {
+            // ws.send('====链接成功===');
+            console.log('=======连接成功=======:', ws);
+          }
+
+          ws.addEventListener("message", function(event) {
+            const data = Number(event.data);
+            const newIndex = data < 4 ? data : 0;
+            mySwiper.value && mySwiper.value.slideTo(newIndex);
+          });
+        })
+
         return {
             onSlideChange,
             activeIndex,
+            handleGetSwiper
         };
-    },
+    }
 };
 </script>
 
