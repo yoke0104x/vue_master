@@ -4,6 +4,8 @@ import energyConsumptionDisplay from "./energyConsumptionDisplay";
 import { useMainStore } from "@/store";
 import { computed } from "vue";
 const useStore = useMainStore();
+
+// 获取新能源装机总量 和 清洁能源占比 的数据
 const data = computed(() => {
     return useStore.targetList
         ?.filter(el => {

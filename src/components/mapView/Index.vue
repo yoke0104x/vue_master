@@ -47,13 +47,14 @@ export default {
 
             this.map = new AMap.Map("map-view", {
               mapStyle: 'amap://styles/fdbb98face95063a17e8ed639ad2027b',
+
               //设置地图容器id
               viewMode: "3D", //是否为3D地图模式
               zoom: 12, //初始化地图级别
               center: [104.362528, 31.048678], //初始化地图中心点位置
               dragEnable: false, //地图是否可以平移
               zoomEnable: false, //地图是否可以缩放
-            }).add(markers).add(setPolyLine())
+            }).add([...markers,setPolyLine()]);
           })
           .catch(e => {
             console.log(e);

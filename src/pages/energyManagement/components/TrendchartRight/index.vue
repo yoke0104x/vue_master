@@ -8,11 +8,14 @@ const state = reactive({
     option: {},
 });
 
+// 矢量图
 const pathSymbols = {
     reindeer:
         "path://M762.660796 332.779048l-119.210905-3.612452 79.473937-182.428809h-242.034262l-115.598453 281.77123 110.179776 9.031129-108.37355 254.670618 111.986001 1.806226-1.806225 196.878616 193.266164-290.80236H556.751051zz",
     plane: "path://M762.660796 332.779048l-119.210905-3.612452 79.473937-182.428809h-242.034262l-115.598453 281.77123 110.179776 9.031129-108.37355 254.670618 111.986001 1.806226-1.806225 196.878616 193.266164-290.80236H556.751051z",
 };
+
+// 配置图表
 const labelSetting = {
     show: true,
     position: "top",
@@ -25,6 +28,9 @@ const { data } = useRequest(getEnergy3);
 const mainStore = useMainStore();
 const title = computed(() => mainStore.minHeaderTitles?.find(el => el.type === 14)?.title ?? "");
 
+/**
+ * 监听数据请求
+ */
 watch(data, val => {
     let { months, years, yearsVlaue } = val;
     const _options = [
@@ -41,6 +47,7 @@ watch(data, val => {
     state.option = _options[optionIndex];
 });
 
+// echarts配置
 const makeOption = (type, symbol, months, years, yearsVlaue) => {
     let _data1 = [];
     let _data2 = [];
