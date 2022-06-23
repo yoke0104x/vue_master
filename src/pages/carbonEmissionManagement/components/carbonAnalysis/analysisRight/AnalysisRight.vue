@@ -1,28 +1,75 @@
 <template>
   <div class="right-container">
     <name-card :name="state.name" class="name-container"/>
-    <charts :options="state.option" height="1800"/>
+    <charts v-if="props.detailInfo.list.length !== 0" :options="state.option" height="1800"/>
   </div>
 
 </template>
 
 <script setup>
 import Charts from '@/components/charts';
-import {reactive} from 'vue';
+import {defineProps, reactive, watch} from 'vue';
+import { map, isEmpty } from 'lodash';
 import NameCard from "@/pages/carbonEmissionManagement/components/carbonAnalysis/NameCard";
+
+
+const props = defineProps({
+  detailInfo: Object
+})
+
 const state = reactive({
-  name: '中大型企业',
-  option: {
+  name: '',
+  option: {},
+  timer: null
+})
+
+const setOption = (list) =>{
+
+  const colors = ['#49D323', '#2781EB', '#69F6FF', '#FB6815'];
+
+  state.timer && clearInterval(state.timer);
+
+  const getTitle = index => {
+    let total = list?.map(el => el.value)?.reduce((a, b) => a * 1 + b * 1, 0);
+    let percent = ((list[index]?.value / total) * 100).toFixed(2);
+    return [
+      {
+        text: percent + "%",
+        top: "58%",
+        textAlign: "center",
+        left: "50%",
+        textStyle: {
+          color: colors[index],
+          fontSize: 55 * 3,
+          fontWeight: 800,
+        },
+      },
+      {
+        text: list[index]?.name,
+        top: "68%",
+        textAlign: "center",
+        left: "50%",
+        textStyle: {
+          color: colors[index],
+          fontSize: 25 * 3,
+        },
+      },
+    ];
+  }
+
+  const initialOption = {
     tooltip: {
       trigger: 'item',
       show: false
     },
-    color: ['#49D323', '#2781EB', '#69F6FF', '#FB6815'],
+    title: getTitle(0),
+    color: colors,
     legend: {
+      data: map(list, item => item.name),
       top: '0',
       left: 'left',
       padding: 132,
-      icon: 'roundRect',
+      icon: 'rect',
       itemWidth: 60,
       itemHeight: 60,
       itemGap: 78,
@@ -35,14 +82,15 @@ const state = reactive({
     },
     series: [
       {
-        name: 'Access From',
+        name: 'carbon',
         type: 'pie',
-        radius: ['25%', '45%'],
-        center: ['50%', '70%'],
+        radius: [350, 500],
+        center: ['50%', '65%'],
         avoidLabelOverlap: false,
+        hoverAnimation: false,
         roseType: 'radius',
         label: {
-          show: true,
+          show: false,
           position: 'center',
           formatter: `{d}%\n{b}`,
           fontSize: 48,
@@ -64,16 +112,37 @@ const state = reactive({
         labelLine: {
           show: false
         },
-        data: [
-          { value: 1048, name: 'Search'},
-          { value: 735, name: 'Direct', },
-          { value: 580, name: 'Email' },
-          { value: 484, name: 'Union Ads' },
-        ]
+        data: list
       }
     ]
   }
-})
+
+  state.option = initialOption;
+
+  let index = 0;
+  let title = [];
+
+  state.timer = setInterval(() => {
+    if (index < list.length) {
+      index++;
+    } else {
+      index = 0;
+    }
+    title = getTitle(index)
+    state.option = {
+      ...initialOption,
+      title
+    };
+  }, 10000);
+}
+
+watch(() => props.detailInfo, val => {
+  state.name = val.name;
+  if(!isEmpty(val.list)){
+    setOption(val.list);
+  }
+}, {immediate: true})
+
 </script>
 
 <style scoped lang="less">
@@ -82,14 +151,13 @@ const state = reactive({
 .right-container{
   width: calc(553px * @measureSize);
   height: 100%;
-  border: 1px solid green;
   position: relative;
 
   .name-container{
     width: 100%;
     position: absolute;
     left: 0;
-    top: calc(106px * @measureSize);
+    top: calc(96px * @measureSize);
   }
 }
 

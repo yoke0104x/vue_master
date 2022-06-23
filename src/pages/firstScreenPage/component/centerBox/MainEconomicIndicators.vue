@@ -87,6 +87,8 @@ export default {
           display: flex;
           align-items: center;
           animation: 1000ms ease 4400ms 1 normal both running bounceInRight;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

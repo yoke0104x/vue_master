@@ -45,7 +45,7 @@ const dischargesData = computed(() =>
   <div class="statis_container">
     <link-ratio :data="leftLinkRatioData" :colors="['#87FC73', '#44D7B6']">
       <template #icon>
-        <img :src="CarbonIcon.left" alt=""/>
+        <img style="width: 100%" :src="CarbonIcon.left" alt=""/>
       </template>
     </link-ratio>
 
@@ -58,7 +58,7 @@ const dischargesData = computed(() =>
 
     <link-ratio :data="rightLinkRatioData" type="right" :colors="['#FB6815', '#FEDB65']">
       <template #icon>
-        <img :src="CarbonIcon.right" alt=""/>
+        <img style="width: 100%" :src="CarbonIcon.right" alt=""/>
       </template>
     </link-ratio>
   </div>
