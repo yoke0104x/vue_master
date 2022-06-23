@@ -38,16 +38,22 @@ export default {
     height: calc(148px * @measureSize);
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     background: url("../../../../assets/images/p1-center-top-bg.png") left bottom no-repeat;
     animation: 1000ms ease 1000ms 1 normal both running fadeIn;
 
     .top-indicators-item{
+      flex: 1;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       margin-right: calc(15px * @measureSize);
+      &:last-child{
+        margin-right: 0;
+      }
 
       .icon-box{
+        flex-shrink: 0;
         margin-right: calc(15px * @measureSize);
         width: calc(136px * @measureSize);
         height: calc(106px * @measureSize);
@@ -62,6 +68,9 @@ export default {
       .detail-wrap{
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        max-width: calc(200px * @measureSize);
 
         .detail-target{
           font-weight: bold;
@@ -88,6 +97,9 @@ export default {
           line-height: normal;
           text-align: left;
           animation: 1000ms ease 2000ms 1 normal both running fadeInLeft;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

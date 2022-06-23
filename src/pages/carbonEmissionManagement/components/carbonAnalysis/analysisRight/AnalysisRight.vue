@@ -19,12 +19,15 @@ const props = defineProps({
 
 const state = reactive({
   name: '',
-  option: {}
+  option: {},
+  timer: null
 })
 
 const setOption = (list) =>{
 
   const colors = ['#49D323', '#2781EB', '#69F6FF', '#FB6815'];
+
+  state.timer && clearInterval(state.timer);
 
   const getTitle = index => {
     let total = list?.map(el => el.value)?.reduce((a, b) => a * 1 + b * 1, 0);
@@ -118,7 +121,8 @@ const setOption = (list) =>{
 
   let index = 0;
   let title = [];
-  setInterval(() => {
+
+  state.timer = setInterval(() => {
     if (index < list.length) {
       index++;
     } else {
