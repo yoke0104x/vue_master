@@ -20,7 +20,7 @@ export const getMarkerList = (AMap, list = [], { markerConfig }, {currentId, onM
             <div class="left-icon"><img src=${require("@/assets/images/p1-map-marker-tips-icon.png")} alt=""/></div>
             <div class="tips-content">
                 <div class="tips-name">${item[markerConfig.toolTipsName]}</div>
-                <div class="tips-target" style="display: ${markerConfig.showTarget ? 'block' : 'none'}">${item.indicatorsValue}<span class="tips-unit"></span></div>
+                <div class="tips-target" style="display: ${markerConfig.showTarget ? 'block' : 'none'}">${item.indicatorsValue}<span class="tips-unit">${item.unit}</span></div>
             </div>
           </div>
           `

@@ -22,9 +22,7 @@ export const useFirstPageStore = defineStore({
             },
             topIndicatorsTaskList: [],
             mapTaskData: [],
-            mainTargetIndicatorsData: {
-
-            },
+            mainTargetIndicatorsList: [],
             titles: []
         })
     },
@@ -83,7 +81,8 @@ export const useFirstPageStore = defineStore({
         async getMapTaskList(){
             const res = await getEconomic1();
             if(isEqual(res?.code, 0) && !isEmpty(res?.data)){
-                this.mapTaskData = res.data;
+                this.mapTaskData = filter(res.data, item => isEqual(item.type, '1') && item.latitude && item.longitude);
+                this.mainTargetIndicatorsList = filter(res.data, item => isEqual(item.type, '2'));
             }
         },
 

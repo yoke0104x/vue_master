@@ -1,29 +1,33 @@
 <template>
   <div class="main-target">
     <div class="title-wrap">
-      <TitleCard :title="titles?.[1]"/>
+      <TitleCard :title="title"/>
     </div>
 
-    <div class="main-target-name">{{target}}</div>
+    <div class="main-target-name" :title="currentData?.customer">{{currentData?.customer}}</div>
 
 <!--    <text-scroll :text="scrollText" :class="['min-target-scroll']"/>-->
 
     <div class="progress-wrap">
-      <el-progress
-          type="dashboard"
-          :percentage="80"
-          :width="981"
-          :stroke-width="44"
-          color="#05CD99"
-      >
-        <template #default="{ percentage }">
-            <div class="percentage-label">社会消费零售品</div>
-            <div class="percentage-value">{{ percentage }}%</div>
-        </template>
-      </el-progress>
+<!--      <el-progress-->
+<!--          type="dashboard"-->
+<!--          :percentage="80"-->
+<!--          :width="981"-->
+<!--          :stroke-width="44"-->
+<!--          color="#05CD99"-->
+<!--      >-->
+<!--        <template #default="{ percentage }">-->
+<!--            <div class="percentage-label" :title="currentData?.category">{{currentData?.category}}</div>-->
+<!--            <div class="percentage-value">{{ currentData?.indicatorsValue }}<span class="target-unit">{{currentData?.unit}}</span></div>-->
+<!--        </template>-->
+<!--      </el-progress>-->
+      <div class="progress-info">
+        <div class="percentage-label" :title="currentData?.category">{{currentData?.category}}</div>
+        <div class="percentage-value">{{ currentData?.indicatorsValue }}<span class="target-unit">{{currentData?.unit}}</span></div>
+      </div>
     </div>
 
-    <div class="min-target-scroll">{{scrollText}}</div>
+    <div class="min-target-scroll" :title="currentData?.target">{{currentData?.target}}</div>
     <div class="pie-bg">
     </div>
 
@@ -32,26 +36,39 @@
 
 </template>
 
-<script>
+<script setup>
 import TitleCard from "@/pages/firstScreenPage/component/centerBox/TitleCard";
 import TextScroll from "@/components/textScroll/TextScroll";
 import { ElProgress } from 'element-plus'
-import {mapState} from "pinia";
 import {useFirstPageStore} from "@/store";
+import {computed, ref, watch} from "vue";
+import { isEmpty } from 'lodash';
 
-export default {
-  name: "MainTargetIndicators",
-  components: {TitleCard, ElProgress, TextScroll},
-  data(){
-    return({
-      target: '保底890亿、力争突破900亿',
-      scrollText: '力争保持全市第一力争保持全市第一梯队力争超过全市平均力争保持招商引资引领姿态'
-    })
-  },
-  computed: {
-    ...mapState(useFirstPageStore, [ 'titles'])
+const firstPageStore = useFirstPageStore();
+
+const title = computed(() => firstPageStore.titles?.[1]);
+
+const currentData = ref({});
+
+const timer = ref(null)
+
+watch(() => firstPageStore.mainTargetIndicatorsList, list => {
+  if(!isEmpty(list)){
+    timer.value && clearInterval(timer.value);
+    currentData.value = list[0];
+    let index = 0;
+    timer.value = setInterval(() => {
+      if(index < list.length - 1){
+        index ++
+      }else{
+        index = 0;
+      }
+      currentData.value = list[index];
+    }, 3000)
   }
-}
+}, {immediate: true})
+
+
 </script>
 
 <style scoped lang="less">
@@ -79,29 +96,31 @@ export default {
       color: #FDFF95;
       animation: 1000ms ease 3000ms 1 normal both running tada;
       margin: 0 auto calc(60px * @measureSize);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .progress-wrap{
+      height: calc(327px * @measureSize);
+      width: calc(327px * @measureSize);
+      margin: 0 auto calc(45px * @measureSize);
+      animation: 5s ease 3s 1 normal both running bounceInLeft;
+      background: url("../../../../assets/images/p1-progress_bg.png") no-repeat;
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      margin-bottom: calc(45px * @measureSize);
-      animation: 1000ms ease 5000ms 1 normal both running fadeIn;
 
-      .el-progress{
-        position: relative;
-        background: url("../../../../assets/images/p1-progress_bg.png") no-repeat;
+      .progress-info{
+        height: 94%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url("../../../../assets/images/p1-progress.png") no-repeat;
         background-size: cover;
-        /deep/ .el-progress__text{
-          position: absolute;
-          top: 50%;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          margin: auto;
-          //margin-top: calc(50% - 200px);
-        }
       }
 
       .percentage-label{
@@ -110,6 +129,7 @@ export default {
         line-height: 1;
         text-align: center;
         margin-bottom: calc(20px * @measureSize);
+        padding: 0 calc(55px * @measureSize);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -117,12 +137,16 @@ export default {
 
       .percentage-value{
         color: #6BCFFA;
-        font-size: calc(96px * @measureSize);
+        font-size: calc(76px * @measureSize);
         line-height: 1;
         text-align: center;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        .target-unit{
+          font-size: calc(20px * @measureSize);
+          margin-left: calc(10px * @measureSize)
+        }
       }
     }
 
@@ -136,9 +160,15 @@ export default {
       text-align: center;
       white-space: pre-wrap;
       overflow: hidden;
-      //margin-bottom: calc(56px * @measureSize);
       margin: 0 auto calc(20px * @measureSize);
-      animation: 1500ms ease 4000ms 1 normal both running fadeInRight
+      animation: 5s ease 3s 1 normal both running fadeInRight;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      /* autoprefixer: off */
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-break: break-all;
     }
 
     .pie-bg{

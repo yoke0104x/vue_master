@@ -6,7 +6,7 @@
 
 import {defineStore} from "pinia";
 import {getCarbonEmission1, getCarbonEmission2, getCarbonEmission3} from "@/api";
-import { isEqual, map, find, isEmpty } from "lodash";
+import { isEqual, map, find, isEmpty, filter } from "lodash";
 import {useMainStore} from "@/store/mainStore";
 
 export const useCarbonEmissionStore = defineStore({
@@ -59,7 +59,7 @@ export const useCarbonEmissionStore = defineStore({
         async getAnalysisList(){
             const res = await getCarbonEmission3();
             if(isEqual(res?.code, 0) && !isEmpty(res?.data)){
-                this.analysisList = res.data;
+                this.analysisList = filter(res.data, item => item.latitude && item.longitude);
             }
         }
     }
