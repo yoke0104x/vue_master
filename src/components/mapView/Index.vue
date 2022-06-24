@@ -99,7 +99,7 @@ export default {
           const nextId = this.list[nextIndex]?.id;
           this.onChangeCurrentId(nextId)
         }
-      }, 5000)
+      }, 15000)
     }
   },
   mounted() {
@@ -121,7 +121,7 @@ export default {
         this.setMarkers(info);
         this.currentIndex = findIndex(this.list, item => item.id === info.currentId);
         if(!this.timer){
-          this.onSetTimer();
+          // this.onSetTimer();
         }
       }
     }
@@ -157,7 +157,7 @@ export default {
     left: 0;
     bottom: 0;
     z-index: 1000;
-    //display: none;
+    display: none;
   }
 
   /deep/ .amap-marker-label {

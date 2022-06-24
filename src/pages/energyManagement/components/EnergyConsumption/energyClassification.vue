@@ -129,7 +129,7 @@ function setOption(val) {
         let index = 0;
         let title = [];
         setInterval(() => {
-            if (index < legendData.length) {
+            if (index < legendData.length - 1) {
                 index++;
             } else {
                 index = 0;

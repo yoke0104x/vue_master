@@ -10,7 +10,7 @@
           :key="index"
       >
         <div class="main-eco-item-target">{{item.indicatorsValue}}</div>
-        <div class="main-eco-item-desc">
+        <div class="main-eco-item-desc" :style="{color: getDescColor(index)}">
           {{`${item.customer}${item.target}`}}
         </div>
       </div>
@@ -22,12 +22,20 @@
 import {mapState} from "pinia";
 import {useFirstPageStore} from "@/store";
 import TitleCard from "@/pages/firstScreenPage/component/centerBox/TitleCard";
+import {COLORS} from "@/constants";
 
 export default {
   name: "MainEconomicIndicators",
   components: {TitleCard},
   computed: {
     ...mapState(useFirstPageStore, ['mapTaskData', 'titles'])
+  },
+  methods: {
+    getDescColor(index){
+      const newIndex = index > 4 ? index % 5 :index;
+      console.log('=======newIndex:', newIndex);
+      return COLORS[newIndex];
+    }
   }
 }
 </script>

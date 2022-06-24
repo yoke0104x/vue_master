@@ -123,7 +123,7 @@ const setOption = (list) =>{
   let title = [];
 
   state.timer = setInterval(() => {
-    if (index < list.length) {
+    if (index < list.length - 1) {
       index++;
     } else {
       index = 0;
