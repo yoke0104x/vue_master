@@ -9,9 +9,17 @@ const state = reactive({
     option: {},
 });
 const mainStore = useMainStore();
+
+// 获取规上工业能耗强度数据
 const lineRatioData = computed(() => mainStore.targetList?.find(el => el.id === "34"));
+
+// 获取园区能源分布
 const echartData = computed(() => mainStore.energyList?.filter(el => el.categoryType === "3"));
+
+// 获取园区能源分布 标题
 const title = computed(() => mainStore.minHeaderTitles?.find(el => el.type === 16)?.title ?? "");
+
+
 watch(
     echartData,
     val => {

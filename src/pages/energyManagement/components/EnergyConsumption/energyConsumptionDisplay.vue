@@ -2,6 +2,8 @@
 import { useMainStore } from "@/store";
 import { computed } from "vue";
 const useStore = useMainStore();
+
+// 获取能耗综合展示数据
 const data = computed(() => {
     let energy = ["电力", "天燃气", "煤炭", "其他"];
     let energyData = useStore?.energyList?.filter(el => el.categoryType == 1);

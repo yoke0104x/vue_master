@@ -9,9 +9,17 @@ const state = reactive({
     option: {},
 });
 const mainStore = useMainStore();
+
+// 获取综合能源消费总量
 const lineRatioData = computed(() => mainStore.targetList?.find(el => el.id === "33"));
+
+// 获取终端能耗构成
 const echartData = computed(() => mainStore.energyList?.filter(el => el.categoryType === "1"));
+
+// 获取终端能耗构成 标题
 const title = computed(() => mainStore.minHeaderTitles?.find(el => el.type === 13)?.title ?? "");
+
+
 watch(
     echartData,
     val => {

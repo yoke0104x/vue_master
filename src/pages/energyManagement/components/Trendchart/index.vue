@@ -34,6 +34,7 @@ const columns = [
 const state = reactive({
     data: [],
 });
+
 const mainStore = useMainStore();
 
 // 获取园区企业能耗数据
