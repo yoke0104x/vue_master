@@ -64,7 +64,7 @@ watch(() => firstPageStore.mainTargetIndicatorsList, list => {
         index = 0;
       }
       currentData.value = list[index];
-    }, 3000)
+    }, 10000)
   }
 }, {immediate: true})
 

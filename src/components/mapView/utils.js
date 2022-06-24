@@ -62,14 +62,14 @@ export const getMarkerList = (AMap, list = [], { markerConfig }, {currentId, onM
         }
 
         const markerItem = new AMap.Marker(option)
-        //TODO swiper 会影响marker的点击,待处理
-        markerItem.on('click', (e) => {
-            console.log('===========e.marker:', e);
+        markerItem.on('mouseover', (e) => {
             onMarketItemClick(item.id)
             // e.target?.setLabel({
             //     content: getToolTipsContent(item)
             // })
         })
+        // console.log('========click:', markerItem, markerItem.hasEvents('click'));
+
 
 
         return markerItem;

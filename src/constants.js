@@ -9,4 +9,4 @@ export const CHARTS_TYPE = {
     LINE: 'line'
 }
 
-export const COLORS = ['#43E086',  '#FFCB4D', '#4ED8F6', '#5AD0C5', '#6296FC']
+export const COLORS = ['#43E086',  '#FFCB4D', '#4ED8F6', '#5AD0C5', '#6296FC'];
