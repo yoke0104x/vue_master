@@ -1,15 +1,17 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper initial-slide='0' class="swiper-container-main" @slideChange="onSlideChange" @swiper="handleGetSwiper">
+            <swiper initial-slide="0" class="swiper-container-main" @slideChange="onSlideChange" @swiper="handleGetSwiper">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
 
-                <swiper-slide>Slide 2</swiper-slide>
+                <swiper-slide>
+                    <transformationCyclization />
+                </swiper-slide>
 
                 <swiper-slide>
-                  <CarbonEmissionManagement/>
+                    <CarbonEmissionManagement />
                 </swiper-slide>
 
                 <swiper-slide>
@@ -26,10 +28,11 @@ import "@/assets/css/custom-animation.css";
 import FirstScreenPage from "@/pages/firstScreenPage";
 import EnergyManagement from "@/pages/energyManagement";
 import CarbonEmissionManagement from "@/pages/carbonEmissionManagement";
+import transformationCyclization from "@/pages/transformationCyclization";
 import Layout from "@/components/layout";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
-import {onMounted, ref, watch} from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useMainStore } from "@/store";
 
 export default {
@@ -41,6 +44,7 @@ export default {
         Layout,
         Swiper,
         SwiperSlide,
+        transformationCyclization,
     },
     setup() {
         const activeIndex = ref(0);
@@ -51,35 +55,39 @@ export default {
             // useStore.setHeaders(e.activeIndex);
         };
 
-        const handleGetSwiper = swiper => mySwiper.value = swiper;
+        const handleGetSwiper = swiper => (mySwiper.value = swiper);
 
-        watch(() => [activeIndex.value, useStore.minHeaderTitles], (newInfo) => {
-          useStore.setHeaders(newInfo?.[0]);
-        }, {immediate: true})
+        watch(
+            () => [activeIndex.value, useStore.minHeaderTitles],
+            newInfo => {
+                useStore.setHeaders(newInfo?.[0]);
+            },
+            { immediate: true },
+        );
 
         onMounted(() => {
-          const ws = new WebSocket(`ws://${window.location.host}/dybigs/webSocket/screen`);
-          //测试环境的
-          // const ws = new WebSocket('ws://121.36.46.110:16993/dybigs/webSocket/screen');
+            const ws = new WebSocket(`ws://${window.location.host}/dybigs/webSocket/screen`);
+            //测试环境的
+            // const ws = new WebSocket('ws://121.36.46.110:16993/dybigs/webSocket/screen');
 
-          ws.onopen = function () {
-            // ws.send('====链接成功===');
-            console.log('=======连接成功=======:', ws);
-          }
+            ws.onopen = function () {
+                // ws.send('====链接成功===');
+                console.log("=======连接成功=======:", ws);
+            };
 
-          ws.addEventListener("message", function(event) {
-            const data = Number(event.data);
-            const newIndex = data < 4 ? data : 0;
-            mySwiper.value && mySwiper.value.slideTo(newIndex);
-          });
-        })
+            ws.addEventListener("message", function (event) {
+                const data = Number(event.data);
+                const newIndex = data < 4 ? data : 0;
+                mySwiper.value && mySwiper.value.slideTo(newIndex);
+            });
+        });
 
         return {
             onSlideChange,
             activeIndex,
-            handleGetSwiper
+            handleGetSwiper,
         };
-    }
+    },
 };
 </script>
 
