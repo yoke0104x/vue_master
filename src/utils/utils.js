@@ -2,8 +2,7 @@
  *@description:
  * @author wayne
  * @date 2022-06-14 13:27
-*/
-
+ */
 
 /**
  *
@@ -33,24 +32,8 @@ function playAnimation(id, animations) {
  * 给元素animation重新赋值
  */
 function setAnimation(element, animation) {
-    const action = `${animation.duration * 1000}ms ease ${animation.delayed * 1000}ms ${animation.loop ? "infinite" : animation.frequency} normal both running ${
-        animation.type
-    }`;
+    const action = `${animation.duration * 1000}ms ease ${animation.delayed * 1000}ms ${animation.loop ? "infinite" : animation.frequency} normal both running ${animation.type}`;
     element.style.animation = action;
 }
 
-const getTitleByType = (list, type = 0) => {
-    if(Array.isArray(list)){
-        const target =  list.find(item => item.type === type);
-        return target?.title || '';
-    }
-
-    return '';
-}
-
-export {
-    getTitleByType,
-    playAnimation
-}
-
-
+export { playAnimation };

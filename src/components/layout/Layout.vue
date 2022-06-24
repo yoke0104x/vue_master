@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <div class="title-wrap" />
-        <div class="title">
+        <div class="title" @click="clickFull" >
             <img src="@/assets/images/title.png" alt="" style="width: 100%; height: 100%" />
         </div>
         <div class="title-name">
-            <p>{{pageTitle}}</p>
+            <p>{{ pageTitle }}</p>
         </div>
         <div class="content-bg" />
 
@@ -26,6 +26,7 @@ import moment from "moment";
 import PageNation from "@/components/pageNation";
 import { mapActions, mapState } from "pinia";
 import { useMainStore } from "@/store";
+import { useFullscreen } from "@vueuse/core";
 export default {
     name: "Layout",
     data() {
@@ -33,6 +34,9 @@ export default {
             titleDate: moment().format("YYYY年MM月DD日 HH:mm:ss"),
             time: null,
         };
+    },
+    setup() {
+
     },
     mounted() {
         this.$nextTick(() => {
@@ -58,7 +62,7 @@ export default {
         });
     },
     computed: {
-        ...mapState(useMainStore, ["minHeaderTitles","pageTitle"]),
+        ...mapState(useMainStore, ["minHeaderTitles", "pageTitle"]),
     },
     components: {
         PageNation,
@@ -69,6 +73,9 @@ export default {
     },
     methods: {
         ...mapActions(useMainStore, ["getMinHeaderTitlesAction"]),
+      clickFull(){
+          console.log(21123123)
+      }
     },
     unmounted() {
         clearInterval(this.time);

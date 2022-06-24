@@ -15,11 +15,11 @@ const data = computed(()=>{
 })
 
 const dataImages = [
-  require("@/assets/images/p2-1.png"),
-  require("@/assets/images/p2-2.png"),
-  require("@/assets/images/p2-3.png"),
-  require("@/assets/images/p2-4.png"),
-  require("@/assets/images/p2-5.png"),
+  // require("@/assets/images/p2-1.png"),
+  // require("@/assets/images/p2-2.png"),
+  // require("@/assets/images/p2-3.png"),
+  // require("@/assets/images/p2-4.png"),
+  // require("@/assets/images/p2-5.png"),
 ]
 
 </script>
@@ -115,8 +115,8 @@ const dataImages = [
   }
 }
 .item_imag1{
-  width: 1344px;
-  height: 1875px;
+  //width: 1344px;
+  //height: 1875px;
   //animation: myAnimation 3.00s steps(1) infinite;
   webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
