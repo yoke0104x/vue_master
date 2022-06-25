@@ -15,6 +15,7 @@ export const useMainStore = defineStore({
             pageTitle: "",
             targetList: [],
             energyList: [],
+            screenTitle: ""
         };
     },
     actions: {
@@ -23,6 +24,7 @@ export const useMainStore = defineStore({
                 const res = await getTitle();
                 if (res?.code === 0) {
                     this.minHeaderTitles = res.data;
+                    this.screenTitle = res.data?.find(item => item.type === 1)?.title;
                     await this.setTargetDataFn();
                     await this.getEnergyFn();
                 }

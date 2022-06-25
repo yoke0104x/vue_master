@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="title-wrap" />
-        <div class="title" @click="clickFull" >
-            <img src="@/assets/images/title.png" alt="" style="width: 100%; height: 100%" />
+        <div class="title" @click="onFullscreenToggle" >
+            {{screenTitle}}
         </div>
         <div class="title-name">
             <p>{{ pageTitle }}</p>
@@ -27,6 +27,7 @@ import PageNation from "@/components/pageNation";
 import { mapActions, mapState } from "pinia";
 import { useMainStore } from "@/store";
 import { useFullscreen } from "@vueuse/core";
+
 export default {
     name: "Layout",
     data() {
@@ -35,8 +36,12 @@ export default {
             time: null,
         };
     },
-    setup() {
+    setup(){
+      const { toggle} = useFullscreen();
 
+      return({
+        onFullscreenToggle: toggle
+      })
     },
     mounted() {
         this.$nextTick(() => {
@@ -62,7 +67,7 @@ export default {
         });
     },
     computed: {
-        ...mapState(useMainStore, ["minHeaderTitles", "pageTitle"]),
+        ...mapState(useMainStore, ["minHeaderTitles","pageTitle", "screenTitle"]),
     },
     components: {
         PageNation,
@@ -73,9 +78,6 @@ export default {
     },
     methods: {
         ...mapActions(useMainStore, ["getMinHeaderTitlesAction"]),
-      clickFull(){
-          console.log(21123123)
-      }
     },
     unmounted() {
         clearInterval(this.time);
