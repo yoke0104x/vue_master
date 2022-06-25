@@ -1,0 +1,150 @@
+---
+kind: pipeline
+name: compile_master
+steps:
+- commands:
+  - npm install --registry=https://registry.npm.taobao.org
+  - npm run build
+  image: node:12.18
+  name: build
+  volumes:
+  - name: nodecache
+    path: /drone/build-root/node_modules
+- commands:
+  - sh /opt/notify-build/notify.sh error 前端-德阳经开区大屏（第二版）（测试服）
+  image: curlimages/curl:7.70.0
+  name: notify-failed
+  volumes:
+  - name: notify
+    path: /opt/notify-build
+  - name: zoneinfo
+    path: /usr/share/zoneinfo
+  - name: localtime
+    path: /etc/localtime
+  when:
+    status:
+    - failure
+trigger:
+  branch:
+  - master
+  event:
+  - push
+type: docker
+volumes:
+- host:
+    path: /opt/eco/BigScreen-deyang_prod/node_modules
+  name: nodecache
+- host:
+    path: /opt/notify-build
+  name: notify
+- host:
+    path: /usr/share/zoneinfo
+  name: zoneinfo
+- host:
+    path: /etc/localtime
+  name: localtime
+workspace:
+  path: /drone/build-root
+---
+kind: pipeline
+name: delivery_master_测试服
+steps:
+- commands:
+  - sh /opt/notify-build/notify.sh ready 前端-德阳经开区大屏（第二版）（测试服）
+  - sleep 10s
+  - echo "ready to go!"
+  image: curlimages/curl:7.70.0
+  name: notify-ready
+  volumes:
+  - name: notify
+    path: /opt/notify-build
+  - name: zoneinfo
+    path: /usr/share/zoneinfo
+  - name: localtime
+    path: /etc/localtime
+- commands:
+  - npm install --registry=https://registry.npm.taobao.org
+  - npm run build
+  image: node:12.18
+  name: build
+  volumes:
+  - name: nodecache
+    path: /drone/build-root/node_modules
+- image: plugins/docker:linux-amd64
+  name: publish
+  settings:
+    dockerfile: Dockerfile
+    mirror:
+      from_secret: docker-hub-mirror
+    password:
+      from_secret: hwswr-tjeco-pass
+    registry: swr.cn-north-4.myhuaweicloud.com
+    repo: swr.cn-north-4.myhuaweicloud.com/ecocenter/BigScreen-deyang
+    tags:
+    - prod
+    username:
+      from_secret: hwswr-tjeco-user
+- image: appleboy/drone-ssh:1-linux-amd64
+  name: deploy
+  settings:
+    host:
+      from_secret: cms-host
+    password:
+      from_secret: cms-pass
+    port: 22
+    script:
+    - sh /opt/eco/BigScreen-deyang_prod/startup_web.sh
+    username:
+      from_secret: cms-user
+- commands:
+  - sleep 10s
+  - sh /opt/notify-build/notify.sh ok 前端-德阳经开区大屏（第二版）（测试服）
+  image: curlimages/curl:7.70.0
+  name: notify-successful
+  volumes:
+  - name: notify
+    path: /opt/notify-build
+  - name: zoneinfo
+    path: /usr/share/zoneinfo
+  - name: localtime
+    path: /etc/localtime
+  when:
+    status:
+    - success
+- commands:
+  - sh /opt/notify-build/notify.sh error 前端-德阳经开区大屏（第二版）（测试服）
+  image: curlimages/curl:7.70.0
+  name: notify-failed
+  volumes:
+  - name: notify
+    path: /opt/notify-build
+  - name: zoneinfo
+    path: /usr/share/zoneinfo
+  - name: localtime
+    path: /etc/localtime
+  when:
+    status:
+    - failure
+trigger:
+  branch:
+  - master
+  event:
+  - promote
+  target:
+  - master_测试服
+type: docker
+volumes:
+- host:
+    path: /opt/eco/BigScreen-deyang_prod/node_modules
+  name: nodecache
+- host:
+    path: /opt/notify-build
+  name: notify
+- host:
+    path: /usr/share/zoneinfo
+  name: zoneinfo
+- host:
+    path: /etc/localtime
+  name: localtime
+workspace:
+  path: /drone/build-root
