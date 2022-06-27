@@ -1,42 +1,39 @@
 <template>
   <div class="main-eco-container">
     <div class="title-wrap">
-      <TitleCard :title="titles?.[0]"/>
+      <TitleCard :title="title"/>
     </div>
-    <div class="main-eco-list">
+    <vue-seamless-scroll :data="mapTaskData" class="main-eco-list">
       <div
           class="main-eco-list-item"
           v-for="(item, index) in mapTaskData"
           :key="index"
       >
-        <div class="main-eco-item-target">{{item.indicatorsValue}}</div>
+        <div class="main-eco-item-target">{{item?.indicatorsValue}}</div>
         <div class="main-eco-item-desc" :style="{color: getDescColor(index)}">
-          {{`${item.customer}${item.target}`}}
+          {{`${item?.customer}${item?.target}`}}
         </div>
       </div>
-    </div>
+    </vue-seamless-scroll>
   </div>
 </template>
 
-<script>
-import {mapState} from "pinia";
+<script setup>
 import {useFirstPageStore} from "@/store";
 import TitleCard from "@/pages/firstScreenPage/component/centerBox/TitleCard";
+import vueSeamlessScroll from 'vue-seamless-scroll'
 import {COLORS} from "@/constants";
+import {computed} from "vue";
 
-export default {
-  name: "MainEconomicIndicators",
-  components: {TitleCard},
-  computed: {
-    ...mapState(useFirstPageStore, ['mapTaskData', 'titles'])
-  },
-  methods: {
-    getDescColor(index){
-      const newIndex = index > 4 ? index % 5 :index;
-      return COLORS[newIndex];
-    }
-  }
+const firstPageStore = useFirstPageStore();
+const title = computed(() => firstPageStore.titles?.[0])
+const mapTaskData = computed(() => firstPageStore.mapTaskData);
+
+const getDescColor = (index) => {
+  const newIndex = index > 4 ? index % 5 :index;
+  return COLORS[newIndex];
 }
+
 </script>
 
 <style scoped lang="less">
@@ -55,7 +52,7 @@ export default {
 
     .main-eco-list{
       height: calc(100% - calc(70px * @measureSize));
-      overflow: auto;
+      overflow: hidden;
       &::-webkit-scrollbar{
         display: none;
       }

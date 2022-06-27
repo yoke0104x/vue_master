@@ -121,7 +121,7 @@ export default {
         this.setMarkers(info);
         this.currentIndex = findIndex(this.list, item => item.id === info.currentId);
         if(!this.timer){
-          // this.onSetTimer();
+          this.onSetTimer();
         }
       }
     }
@@ -165,10 +165,9 @@ export default {
     padding: 0;
 
     .tips-container {
-      width: calc(229px * @measureSize);
-      height: calc(108px * @measureSize);
-      //background: url("../../assets/images/p1-map-tips-bg.png") no-repeat;
-      background: #0096FF;
+      width: calc(215px * @measureSize);
+      height: calc(90px * @measureSize);
+      background: url("../../assets/images/p1-map-tips-bg.png") no-repeat;
       background-size: cover;
       padding: calc(15px * @measureSize) calc(17px * @measureSize) calc(5px * @measureSize);
       display: flex;
@@ -186,11 +185,12 @@ export default {
       }
 
       .tips-content {
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        flex: 1;
+        overflow: hidden;
         .tips-name {
           color: #4bdfff;
           font-size: calc(16px * @measureSize);
@@ -201,20 +201,25 @@ export default {
           white-space: pre-wrap;
           overflow: hidden;
           flex-shrink: 0;
+          width: 100%;
         }
 
         .tips-target {
           font-weight: bold;
-          font-size: calc(50px * @measureSize);
-          line-height: normal;
+          font-size: calc(45px * @measureSize);
+          line-height: 1;
           text-align: left;
           color: rgb(67, 224, 134);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
           //animation: 1000ms ease 2000ms 1 normal both running fadeInDown;
 
           .tips-unit {
             color: #1ac9ff;
             font-weight: bold;
-            font-size: calc(20px * @measureSize);
+            font-size: calc(15px * @measureSize);
             line-height: normal;
             text-align: left;
             margin-left: calc(10px * @measureSize);
