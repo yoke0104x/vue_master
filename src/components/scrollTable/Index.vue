@@ -36,7 +36,7 @@ import { ElRow, ElCol } from "element-plus";
 <style lang="less" scoped>
 @import "../../global.less";
 .keyword {
-  padding: calc(14px * @measureSize) 0;
+  padding: calc(24px * @measureSize) 0;
 
   &:nth-child(odd) {
     background: rgba(34,64,109,0.8);
