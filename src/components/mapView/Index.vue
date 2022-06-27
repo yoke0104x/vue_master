@@ -55,7 +55,7 @@ export default {
               mapStyle: 'amap://styles/fdbb98face95063a17e8ed639ad2027b',
               //设置地图容器id
               viewMode: "3D", //是否为3D地图模式
-              zoom: 15, //初始化地图级别
+              zoom: 14, //初始化地图级别
               center: [104.394817,31.074991], //初始化地图中心点位置
               dragEnable: false, //地图是否可以平移
               zoomEnable: false, //地图是否可以缩放
