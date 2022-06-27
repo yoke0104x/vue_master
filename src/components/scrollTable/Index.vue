@@ -37,7 +37,16 @@ import { ElRow, ElCol } from "element-plus";
 @import "../../global.less";
 .keyword {
   padding: calc(14px * @measureSize) 0;
+
+  &:nth-child(odd) {
+    background: rgba(34,64,109,0.8);
+  }
+
+  &:nth-child(even) {
+    //background: #fff;
+  }
 }
+
 .title {
   color: #fff;
   font-size: calc(28px * @measureSize);
@@ -56,8 +65,7 @@ import { ElRow, ElCol } from "element-plus";
   display: block;
 }
 .today-header {
-  background: rgba(255, 255, 255, 0.3);
-  color: #ccc;
+  color: rgb(73, 183, 244);
   padding: calc(25px * @measureSize) 0;
   font-size: calc(14px * @measureSize);
 }

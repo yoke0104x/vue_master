@@ -1,9 +1,8 @@
 <script setup>
-import vueSeamless from "vue-seamless-scroll/src";
-import { ElRow, ElCol } from "element-plus";
-import { computed, reactive, toRef, toRefs } from "vue";
+import { computed, reactive, watch, toRefs } from "vue";
 import { getEnergy2 } from "@/api";
 import { useMainStore } from "@/store";
+import useRequest from "@/hooks/useRequest";
 const columns = [
     {
         title: "序号",
@@ -36,41 +35,23 @@ const state = reactive({
 });
 
 const mainStore = useMainStore();
+const { data: datas, loading } = useRequest(getEnergy2);
 
-// 获取园区企业能耗数据
-getEnergy2().then(res => {
-    if (res?.code == 0) {
-        state.data = res.data?.map((el, index) => ({ ...el, key: index + 1 })) ?? [];
-    }
+watch(datas, val => {
+    state.data = val?.map((el, index) => ({ ...el, key: index + 1 }));
 });
 
 // 获取页面title
 const title = computed(() => {
     return mainStore.minHeaderTitles?.find(el => el.type === 15)?.title ?? "";
-})
+});
 
 let { data } = toRefs(state);
 </script>
 
 <template>
     <div>
-        <div class="title">{{ title }}</div>
-        <div class="today-content">
-            <div class="today-header">
-                <el-row>
-                    <el-col v-for="(item, index) in columns" :key="index" :span="item.span">{{ item?.title }} </el-col>
-                </el-row>
-            </div>
-            <vueSeamless :data="data" class="today-key-c">
-                <div v-for="(items, index) in data" :key="index" class="keyword">
-                    <el-row>
-                        <el-col class="ti-record-mail" v-for="(item, index) in columns" :key="index" :span="item.span">
-                            {{ items[item.key] }}
-                        </el-col>
-                    </el-row>
-                </div>
-            </vueSeamless>
-        </div>
+        <scroll-table :columns="columns" :data="data" :title="title" :loading="loading" />
     </div>
 </template>
 

@@ -47,7 +47,7 @@ onMounted(() => {
 
 watchEffect(() => {
   if(!carbonEmissionStore.carbonEmissions.loading){
-    state.data = carbonEmissionStore.carbonEmissions.data;
+    state.data = carbonEmissionStore.carbonEmissions.data?.map((el, index) => ({ ...el, key: index + 1 }));
     state.loading = false
   }
 
