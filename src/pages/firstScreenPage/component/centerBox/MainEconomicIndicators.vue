@@ -33,7 +33,6 @@ export default {
   methods: {
     getDescColor(index){
       const newIndex = index > 4 ? index % 5 :index;
-      console.log('=======newIndex:', newIndex);
       return COLORS[newIndex];
     }
   }

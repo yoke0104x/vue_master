@@ -5,22 +5,8 @@
     </div>
 
     <div class="main-target-name" :title="currentData?.customer">{{currentData?.customer}}</div>
-
-<!--    <text-scroll :text="scrollText" :class="['min-target-scroll']"/>-->
-
-    <div class="progress-wrap">
-<!--      <el-progress-->
-<!--          type="dashboard"-->
-<!--          :percentage="80"-->
-<!--          :width="981"-->
-<!--          :stroke-width="44"-->
-<!--          color="#05CD99"-->
-<!--      >-->
-<!--        <template #default="{ percentage }">-->
-<!--            <div class="percentage-label" :title="currentData?.category">{{currentData?.category}}</div>-->
-<!--            <div class="percentage-value">{{ currentData?.indicatorsValue }}<span class="target-unit">{{currentData?.unit}}</span></div>-->
-<!--        </template>-->
-<!--      </el-progress>-->
+    <div class="progress-wrap" :style="{background: getBg(currentData.index)}">
+      <img class="progress-bg" :src="getBg(currentData.index)" alt=""/>
       <div class="progress-info">
         <div class="percentage-label" :title="currentData?.category">{{currentData?.category}}</div>
         <div class="percentage-value">{{ currentData?.indicatorsValue }}<span class="target-unit">{{currentData?.unit}}</span></div>
@@ -55,7 +41,8 @@ const timer = ref(null)
 watch(() => firstPageStore.mainTargetIndicatorsList, list => {
   if(!isEmpty(list)){
     timer.value && clearInterval(timer.value);
-    currentData.value = list[0];
+    currentData.value = {...list[0], index: 0};
+
     let index = 0;
     timer.value = setInterval(() => {
       if(index < list.length - 1){
@@ -63,10 +50,13 @@ watch(() => firstPageStore.mainTargetIndicatorsList, list => {
       }else{
         index = 0;
       }
-      currentData.value = list[index];
+      currentData.value = {...list[index], index}
     }, 10000)
   }
 }, {immediate: true})
+
+const getBg = index => require(`@/assets/images/p1-target-indicator${index || 0}.png`);
+
 
 
 </script>
@@ -106,33 +96,39 @@ watch(() => firstPageStore.mainTargetIndicatorsList, list => {
       width: calc(327px * @measureSize);
       margin: 0 auto calc(45px * @measureSize);
       animation: 5s ease 3s 1 normal both running bounceInLeft;
-      background: url("../../../../assets/images/p1-progress_bg.png") no-repeat;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      position: relative;
 
       .progress-info{
-        height: 94%;
-        width: 94%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: url("../../../../assets/images/p1-progress.png") no-repeat;
-        background-size: cover;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .progress-bg{
+        position: absolute;
+        height: 100%;
+        width: 100%;
       }
 
       .percentage-label{
         color: #EAFF6B;
         font-size: calc(24px * @measureSize);
-        line-height: 1;
+        line-height: 1.5;
         text-align: center;
         margin-bottom: calc(20px * @measureSize);
-        padding: 0 calc(55px * @measureSize);
-        white-space: nowrap;
+        padding: 0 calc(50px * @measureSize);
+        width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-break: break-all;
       }
 
       .percentage-value{
