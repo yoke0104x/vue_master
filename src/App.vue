@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="screen-page-wrap">
-            <swiper initial-slide="0" class="swiper-container-main" @slideChange="onSlideChange" @swiper="handleGetSwiper">
+            <swiper initial-slide="0" class="swiper-container-main" :modules="modules" :autoplay="autoplay" @slideChange="onSlideChange" @swiper="handleGetSwiper">
                 <swiper-slide>
                     <FirstScreenPage />
                 </swiper-slide>
@@ -31,6 +31,7 @@ import CarbonEmissionManagement from "@/pages/carbonEmissionManagement";
 import transformationCyclization from "@/pages/transformationCyclization";
 import Layout from "@/components/layout";
 import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
 import { onMounted, ref, watch } from "vue";
 import { useMainStore } from "@/store";
@@ -50,6 +51,10 @@ export default {
         const activeIndex = ref(0);
         const mySwiper = ref(null);
         const useStore = useMainStore();
+        const autoplay = {
+            delay: 1000 * 60 * 20,
+            enabled: true,
+        };
         const onSlideChange = e => {
             activeIndex.value = e.activeIndex;
             // useStore.setHeaders(e.activeIndex);
@@ -86,6 +91,8 @@ export default {
             onSlideChange,
             activeIndex,
             handleGetSwiper,
+            autoplay,
+            modules: [Autoplay],
         };
     },
 };

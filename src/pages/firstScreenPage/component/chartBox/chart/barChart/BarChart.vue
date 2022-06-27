@@ -236,7 +236,7 @@ export default {
     const option = getOption({colors, xAxisValueList, yAxisValueList})
     myChart.setOption(option);
 
-    let color = ["red", "#fff", "red"];
+    let color = ["#7BD71E", "#CEE82F", "#7BD71E"];
     this.timer = setInterval(() => {
       let index = Math.floor(Math.random() * 5 + 0);
       colors = colors.map((el, i) => {
