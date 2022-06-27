@@ -145,7 +145,7 @@ export default {
 @import "../../global";
 
 .map-view{
-  height: 100%;
+  height: calc(100% - 9%);
   width: 100%;
   position: relative;
 

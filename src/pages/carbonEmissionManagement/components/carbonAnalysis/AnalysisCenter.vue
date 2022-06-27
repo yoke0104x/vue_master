@@ -61,6 +61,9 @@ const state = reactive({
   padding-bottom: calc(95px * @measureSize);
   position: relative;
 
+  .map-view{
+    height: 100%;
+  }
   .map-mask{
     width: calc(783.33px * @measureSize);
     height: calc(31.33px * @measureSize);

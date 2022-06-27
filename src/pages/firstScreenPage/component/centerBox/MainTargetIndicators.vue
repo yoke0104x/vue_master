@@ -66,7 +66,7 @@ const getBg = index => require(`@/assets/images/p1-target-indicator${index || 0}
     width: calc(600px * @measureSize);
     height: 100%;
     padding-top: calc(57px * @measureSize);
-
+    animation: 5s ease 3s 1 normal both running fadeInRight;
     .title-wrap {
         margin-bottom: calc(60px * @measureSize);
         display: flex;
@@ -77,24 +77,21 @@ const getBg = index => require(`@/assets/images/p1-target-indicator${index || 0}
         height: calc(60px * @measureSize);
         width: calc(485px * @measureSize);
         text-align: center;
-        line-height: 1.2;
+        line-height: calc(60px * @measureSize);
         font-weight: bold;
-        font-size: calc(36px * @measureSize);
+        font-size: calc(25px * @measureSize);
         background: url("../../../../assets/images/pi-center-main-target-bg.png") no-repeat;
         background-size: cover;
         color: #fdff95;
         animation: 1000ms ease 3000ms 1 normal both running tada;
         margin: 0 auto calc(60px * @measureSize);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .progress-wrap {
         height: calc(327px * @measureSize);
         width: calc(327px * @measureSize);
         margin: 0 auto calc(45px * @measureSize);
-        animation: 5s ease 3s 1 normal both running bounceInLeft;
+        animation: 1s ease 5s 1 normal both running swing;
         position: relative;
 
         .progress-info {
@@ -146,7 +143,7 @@ const getBg = index => require(`@/assets/images/p1-target-indicator${index || 0}
     }
 
     .min-target-scroll {
-        width: calc(474px * @measureSize);
+        width: calc(360px * @measureSize);
         color: #86cff9;
         font-size: calc(22px * @measureSize);
         line-height: normal;
