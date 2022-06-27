@@ -32,7 +32,7 @@ trigger:
 type: docker
 volumes:
 - host:
-    path: /opt/eco/BigScreen-deyang_prod/node_modules
+    path: /opt/eco/dy-bigs-web-v2_prod/node_modules
   name: nodecache
 - host:
     path: /opt/notify-build
@@ -79,7 +79,7 @@ steps:
     password:
       from_secret: hwswr-tjeco-pass
     registry: swr.cn-north-4.myhuaweicloud.com
-    repo: swr.cn-north-4.myhuaweicloud.com/ecocenter/BigScreen-deyang
+    repo: swr.cn-north-4.myhuaweicloud.com/ecocenter/dy-bigs-web-v2
     tags:
     - prod
     username:
@@ -93,7 +93,7 @@ steps:
       from_secret: cms-pass
     port: 22
     script:
-    - sh /opt/eco/BigScreen-deyang_prod/startup_web.sh
+    - sh /opt/eco/dy-bigs-web-v2_prod/startup_web.sh
     username:
       from_secret: cms-user
 - commands:
@@ -135,7 +135,7 @@ trigger:
 type: docker
 volumes:
 - host:
-    path: /opt/eco/BigScreen-deyang_prod/node_modules
+    path: /opt/eco/dy-bigs-web-v2_prod/node_modules
   name: nodecache
 - host:
     path: /opt/notify-build
