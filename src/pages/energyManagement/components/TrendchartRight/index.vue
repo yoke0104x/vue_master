@@ -64,6 +64,7 @@ const makeOption = (type, symbol, months, years, yearsVlaue) => {
         });
     });
     return {
+        color: ["#5282FF", "#38DD34"],
         legend: {
             data: years ?? [],
             textStyle: { fontSize: 24 * 3, color: "#fff" },
@@ -168,7 +169,7 @@ const { option } = toRefs(state);
 
 <template>
     <div class="box">
-        <div class="title">{{title}}</div>
+        <div class="title">{{ title }}</div>
         <charts class="card-echarts" height="2800" :options="option" />
     </div>
 </template>

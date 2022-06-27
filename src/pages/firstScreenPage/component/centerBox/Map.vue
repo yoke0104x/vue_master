@@ -1,13 +1,19 @@
 <template>
     <div class="map-wrap">
+
       <second-title :name="title" :class="['map-title']"/>
+
+      <div class="map-target">
+        <img src="../../../../assets/images/map-masker.png" alt=""  class="map-mask"/>
         <MapView
-            :currentId="currentId"
-            :data="mapTaskData"
-            :markerConfig="markerConfig"
-            id="firstPage"
-            :onChangeCurrentId="handleChangeCurrentId"
+          :currentId="currentId"
+          :data="mapTaskData"
+          :markerConfig="markerConfig"
+          id="firstPage"
+          :onChangeCurrentId="handleChangeCurrentId"
         />
+      </div>
+
     </div>
 </template>
 
@@ -56,10 +62,21 @@ export default {
     width: 100%;
     padding: calc(38px * @measureSize) calc(56px * @measureSize) calc(108px * @measureSize);
     animation: 1000ms ease 3000ms 1 normal both running fadeIn;
-
     .map-title {
         margin: 0 auto calc(10px * @measureSize);
     }
+
+  .map-target{
+    position: relative;
+    height: 100%;
+  }
+   .map-mask{
+     position: absolute;
+     top: 0;
+     left: 50%;
+     z-index: 999;
+     transform: translate(-50%, 0);
+   }
 
     #p1-map-container {
         width: 100%;

@@ -21,7 +21,7 @@ const seriesData = data?.eivs?.filter(el => el.year >= data?.startYear)?.map(el 
       value: el.value,
       name: el.year,
       symbol: 'circle',
-      symbolSize: 10,
+      symbolSize: 20,
       itemStyle: {
         color: "rgba(255,255,255,1)",
       },
@@ -127,7 +127,7 @@ export default {
           return {
             ...el,
             itemStyle: {
-              color: "#008df9",
+              color: "#7BD71E",
             },
           }
         }
