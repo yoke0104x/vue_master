@@ -71,9 +71,9 @@ export default {
         );
 
         onMounted(() => {
-            const ws = new WebSocket(`ws://${window.location.hostname}:16991/dybigs/webSocket/screen`);
+            // const ws = new WebSocket(`ws://${window.location.hostname}:16993/dybigs/webSocket/screen`);
             //测试环境的
-            // const ws = new WebSocket('ws://121.36.46.110:16993/dybigs/webSocket/screen');
+            const ws = new WebSocket('ws://121.36.46.110:16993/dybigs/webSocket/screen');
 
             ws.onopen = function () {
                 // ws.send('====链接成功===');
