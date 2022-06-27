@@ -1,5 +1,6 @@
 <template>
 <div class="map-container">
+  <img src="../../../../assets/images/map-masker.png" alt=""  class="map-mask"/>
   <map-view
       id="carbon"
       :data="data"
@@ -58,6 +59,17 @@ const state = reactive({
 .map-container{
   flex: 1;
   padding-bottom: calc(95px * @measureSize);
+  position: relative;
+
+  .map-mask{
+    width: calc(783.33px * @measureSize);
+    height: calc(31.33px * @measureSize);
+    position: absolute;
+    left: 50%;
+    margin-left: calc(calc(783.33px * @measureSize) / -2);
+    z-index: 1;
+  }
+
 }
 
 </style>

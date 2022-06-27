@@ -150,14 +150,14 @@ export default {
   position: relative;
 
   .map-bg {
-    //pointer-events: none;
+    pointer-events: none;
     width: 100%;
     height: 100%;
     position: absolute;
     left: 0;
     bottom: 0;
     z-index: 1000;
-    display: none;
+    //display: none;
   }
 
   /deep/ .amap-marker-label {
